@@ -1,0 +1,185 @@
+
+aside {
+  width: 30%;
+  background: rgb(233, 233, 233);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  overflow: hidden;
+  width: 9.8rem;
+  flex-shrink: 0;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 0px 20px;
+}
+.sidebarHeader button {
+  height: 36px;
+  background-color: white;
+  border-radius: 0.3rem;
+  width: 1.41rem;
+  height: 1.57rem;
+}
+
+.addNewBtn {
+  font-size: 1rem;
+  margin-left: auto;
+  cursor: pointer;
+  border: 0;
+}
+.searchBox {
+  background-color: rgb(255, 255, 255);
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px 0 10px;
+  height: 1.57rem;
+}
+
+.searchBox button {
+  all: unset;
+  margin-top: 3px;
+}
+
+.searchBox input {
+  height: 24px;
+  margin-left: 10px;
+  border: 0px solid rgb(236, 236, 236);
+  flex-grow: 1;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+
+.hrLine {
+  margin-top: 10px;
+  border: 0.2px solid rgb(212, 212, 212);
+  align-self: stretch;
+  width: 100%;
+}
+
+.userList {
+  border: 0.2px solid rgb(182, 182, 182);
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.userList li {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding-left: 10px;
+  border-bottom: 1px solid rgb(202, 199, 199);
+  
+}
+
+.userList li:hover{
+  background-color: rgba(204, 204, 204, .3);
+  cursor: pointer;
+}
+.userList li img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.userList li h1 {
+  font-size: 20px;
+  color: var(--paragraphColor);
+  color: black;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+.userList li p {
+  font-size: 14px;
+  color: var(--titleColor);
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  color: var(--paragraphColor);
+  margin: 0;
+  padding: 0;
+  
+}
+
+.userPlaceholder {
+  animation: blink 1s linear infinite;
+}
+
+.placeholderImg {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: grey;
+  margin-right: 10px;
+}
+.placeholderText {
+  /* animation: blink 1s linear infinite; */
+}
+.placeholderH1 {
+  width: 100px;
+  height: 10px;
+  background-color: grey;
+  border-radius: 2px;
+}
+.placeholderP {
+  width: 80px;
+  height: 10px;
+  background-color: grey;
+  margin-top: 10px;
+  border-radius: 2px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.errorView{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 1;
+  align-self: center;
+  /* height: 4rem; */
+  margin-top: 3rem;
+}
+
+.errorView img {
+  height: 2rem;
+  width: 2rem;
+  border-radius: .3rem;
+}
+
+.errorView h1{
+  font-size: .6rem;
+  font-weight: 600;
+}
+
+.errorView p{
+  font-size: .4rem;
+  font-weight: 600;
+  color: gray;
+}
+
+.errorView button{
+  background-color: rgb(14, 120, 242);
+  border: 0;
+  padding: .1rem .3rem;
+  color: white;
+  border-radius: .1rem;
+  margin-top: .2rem;
+}

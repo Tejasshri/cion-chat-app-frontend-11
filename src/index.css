@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: bree serif, montype corsiva;
+}
+
+code {
+  font-family: bree serif, montype corsiva;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+html {
+  font-size: 4.4vw;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 2.7vw;
+  }
+}
+
+:root {
+  --brandColor: #802a8f;
+  --lightPink: #f0d0dc;
+  --paragraphColor: #979797;
+  --fontSize53pxMD: 1rem;
+  --fontSize33pxMD: 0.62rem;
+  --fontSize22pxSM: 1rem;
+  --cardBackground: #d37fa0;
+  --colorBlack: #444444;
+  --serviceGray: #979797;
+  --sectionBackground: #fbe4ff;
+  --cardBorder: #d5d5d5;
+  --doctorBoxShadow: 16px 18px 45px 0px #00000026;
+  --titleColor: #323232;
+}

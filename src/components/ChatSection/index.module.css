@@ -1,0 +1,62 @@
+.chatSection {
+  flex-grow: 1;
+  background: rgb(190, 190, 190);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.userDetailsHeader {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  background-color: #eaeaea;
+  border: 1px solid rgb(180, 180, 180);
+  padding: 0 0.4rem;
+  flex-shrink: 0;
+}
+
+.userImageDiv {
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.userPersonalData {
+  display: flex;
+  align-items: center;
+}
+
+.userNameAndOnlineStatus {
+  margin-left: 0.4rem;
+}
+
+.userNameAndOnlineStatus h1 {
+  font-size: 0.5rem;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+}
+.userNameAndOnlineStatus p {
+  font-size: 0.35rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.userNameAndOnlineStatus p span {
+  display: inline-block;
+  height: 0.2rem;
+  width: 0.2rem;
+  border-radius: 50%;
+  background-color: green;
+  margin-right: 0.1rem;
+}
+
+

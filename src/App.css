@@ -1,0 +1,5 @@
+.chat-conteact-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

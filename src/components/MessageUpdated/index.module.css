@@ -1,0 +1,296 @@
+.message {
+  max-width: 60%;
+  align-self: flex-start;
+  border-radius: 0.1rem;
+  border-bottom-left-radius: 0;
+  background-color: white;
+  padding: 0 0.8rem 0 0.4rem;
+  box-shadow: 0 4px 16px 0 #bfbfbf;
+  margin-top: 0.4rem;
+  min-height: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.message p {
+  font-size: 0.4rem;
+  color: var(--paragraphColor);
+}
+.message span.time {
+  position: absolute;
+  right: 0.1rem;
+  bottom: 0rem;
+  font-size: 0.2rem;
+  z-index: 1000;
+}
+
+.message:has(.imageDiv) {
+  padding: 0;
+}
+
+.imageDiv {
+  height: 4rem;
+  min-width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  background-color: #dadada;
+  flex-grow: 1;
+}
+.message:has(.videoDiv) {
+  padding: 0;
+}
+.videoDiv {
+  min-height: 4rem;
+  min-width: 4rem;
+  max-width: 6rem;
+  max-height: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  background-color: #dadada;
+}
+.videoDiv video {
+  max-height: 100%;
+  max-width: 100%;
+}
+.message:has(.locationDiv) {
+  padding: 0;
+}
+.locationDiv {
+  height: 5rem;
+  width: 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  background-color: #bfbfbf;
+}
+
+.locationDiv .captionAddress {
+  color: white;
+  align-self: flex-start;
+  padding: 0 0.2rem;
+}
+
+.audioDiv {
+  height: 1.5rem;
+  min-width: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.3rem;
+  overflow: visible;
+}
+
+.audioDiv:has(audio) {
+  box-shadow: none;
+  background-color: #f1f0f0;
+}
+
+audio {
+  height: 100%;
+}
+
+.documentDiv {
+  height: 1.5rem;
+  min-width: 5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.1rem !important;
+  overflow: visible;
+}
+
+.documentDiv svg {
+  flex-shrink: 0;
+}
+
+.documentDiv p {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  align-self: center !important;
+  flex-shrink: 0;
+}
+
+.documentDiv > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageVideo {
+  min-height: 3rem;
+  height: auto;
+  min-width: 4rem;
+  max-width: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background-color: #bfbfbf;
+  overflow: hidden;
+}
+
+.imageVideo video {
+  height: 100%;
+  width: 100%;
+}
+
+.docImage {
+  margin: auto;
+  color: var(--brandColor);
+  align-self: center;
+  height: 1rem !important;
+}
+
+.outgoingMessage {
+  align-self: flex-end;
+  border-radius: 0.1rem;
+  border-bottom-right-radius: 0;
+  background-color: #dfffd5;
+}
+
+.outgoingMessage p {
+}
+
+.outgoingMessage span.time {
+  left: initial;
+  position: absolute;
+  right: 0.1rem !important;
+}
+
+.caption {
+  align-self: flex-start;
+  padding: 0 0.1rem;
+  margin: 0.1rem 0.1rem;
+  background-color: rgb(131, 36, 226);
+  border-radius: 0.1rem;
+}
+
+.documentDiv:has(.imageLoader) {
+  min-width: 4rem;
+}
+
+.imageLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.downloadBtn {
+  position: absolute;
+  right: 0.2rem;
+  top: 0.2rem;
+  margin: 0;
+  padding: 0;
+  /* display: none; */
+  color: rgb(135, 135, 135);
+  font-size: 0.8rem;
+  transition: 1s;
+  opacity: 0.9;
+  z-index: 1000;
+}
+.downloadBtn:hover {
+  opacity: 1;
+}
+.message:hover .downloadBtn {
+  display: inline-block;
+}
+.downloadBtn svg {
+  border: 1px solid;
+  border-radius: 50%;
+}
+
+.audioIcon {
+  color: var(--brandColor);
+  margin: auto;
+  border: 1.5px solid var(--brandColor);
+  padding: 0.05rem;
+  border-radius: 50%;
+  font-size: 30px !important;
+}
+
+.message:has(.audioIcon) {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding: 0.1rem 0.3rem;
+  width: 6rem;
+  height: 1.5rem;
+}
+
+audio {
+  background-color: rgb(243, 243, 243);
+  align-self: center;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: red !important;
+  margin-left: 0.4rem !important;
+  border: 1px solid red;
+  border-radius: 0.1rem;
+  padding: 0 0.1rem !important;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.error svg {
+  top: 0.3rem;
+  position: relative;
+}
+
+.reactionDiv {
+  position: absolute;
+  bottom: -.3rem;
+  left: .3rem;
+  box-shadow: 0 4px 16px 0 #bfbfbf;
+  background-color: white;
+  border-radius: .2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.reactionDiv p {
+  font-size: .3rem;
+}
+
+.outgoingMessage .reactionDiv {
+  left: unset;
+  right: .3rem;
+}
+
+.reactionUser{
+  position: absolute;
+  left: unset;
+  right: -3rem;
+  top: 0;
+  background-color: white;
+  box-shadow: 0 4px 16px 0 #bfbfbf;
+  min-width: 1rem;
+  min-width: 2rem;
+  border-radius: .2rem;
+  padding: .1rem;
+}
+
+.outgoingMessage .reactionUser{
+  left: -3rem;
+  top: 0;
+  right: unset;
+}

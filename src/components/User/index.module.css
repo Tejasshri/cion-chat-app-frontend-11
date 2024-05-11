@@ -1,0 +1,41 @@
+.messageDetailsContainer{
+    flex-grow: 1;
+    padding-right: .2rem;
+}
+
+.messageDetailsHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.imageDiv{
+    height: 1.5rem;
+    width: 1.5rem;
+    font-size: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(220, 220, 220);
+    border-radius: 50%;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid var(--brandColor);
+    color: var(--brandColor);
+}
+
+.lastMessageImageIcon{
+    margin-right: .2rem;
+}
+
+.lastMessageLoader{
+    height: .5rem;
+    border-radius: .04rem;
+    width: 2rem;
+    background-color: rgb(194, 194, 194);
+
+}
+
+.selectedUser{
+    background-color: rgb(204, 204, 204) !important;
+}

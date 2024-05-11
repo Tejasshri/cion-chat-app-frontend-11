@@ -1,0 +1,48 @@
+.messageForm {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  flex-shrink: 0;
+  background-color: rgb(221, 221, 221);
+}
+
+.inputDiv {
+  height: 1.15rem;
+  width: 21.9rem;
+  background-color: white;
+  border-radius: 0.2rem;
+  display: flex;
+  align-items: center;
+  padding-right: 0.3rem;
+  overflow: hidden;
+}
+
+.inputDiv button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brandColor);
+  border: 0;
+  border-radius: 50%;
+  height: 0.8rem;
+  width: 0.8rem;
+  margin-left: auto;
+  color: white;
+  cursor: pointer;
+}
+.inputDiv input {
+  flex-grow: 1;
+  height: 100%;
+  padding-left: 0.3rem;
+  outline: none;
+  border: 0;
+  font-size: 0.4rem;
+}
+
+.sendIcon {
+  height: 0.5rem;
+  width: 0.5rem;
+}
