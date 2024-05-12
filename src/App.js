@@ -14,6 +14,7 @@ import ReactContext from "./context/ReactContext";
 // Styles in module
 import "./App.css";
 
+import socket from "./Socket";
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -21,6 +22,17 @@ export default function App() {
   const [selectedUser, setSelectedUser] = useState(undefined);
   const [scroll, setScroll] = useState(false);
 
+  useEffect(() => {
+    socket.connect();
+    socket.on("connect", () => {
+      console.log("connected")
+      socket.emit("join", "Joined");
+    });
+    socket.on("update user message", () => {
+      console.log("Update message");
+    });
+    return () => socket.disconnect();
+  }, []);
 
   return (
     <ReactContext.Provider

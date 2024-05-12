@@ -13,16 +13,18 @@ function Sidebar() {
 
   const getUserData = async () => {
     try {
+      setErr("")
       setIsLoading(true);
       const response = await fetch(`${webUrl}/users`);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        console.log(data, "Okay");
         setUsers(data.data);
       } else {
         setErr("Failed to get");
       }
     } catch (error) {
+      console.log(error.message)
       setErr(error.message);
     } finally {
       setIsLoading(false);
@@ -54,7 +56,7 @@ function Sidebar() {
       <ul className={styles.userList}>
         {isLoading ? (
           <LoadingView />
-        ) : err ? (
+        ) : err !== "" ? (
           getErrorView()
         ) : (
           users?.map((each) => (

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { IoSend } from "react-icons/io5";
+import { MdScheduleSend } from "react-icons/md";
+import { MdCancelScheduleSend } from "react-icons/md";
 
 import styles from "./index.module.css";
 import { webUrl } from "../../Common";
@@ -23,8 +25,8 @@ function MessageInputForm() {
     socket.connect();
     socket.on("update message", (messageId) => {
       console.log(messageId);
-      setUserMessages(n => [...n, messageId])
-      setScroll(n => !n)
+      setUserMessages((n) => [...n, messageId]);
+      setScroll((n) => !n);
     });
     return () => {
       socket.disconnect();
@@ -49,6 +51,7 @@ function MessageInputForm() {
       },
     };
     try {
+      setErr("")
       setLoading(true);
       let response = await fetch(api, {
         method: "POST",
@@ -70,12 +73,14 @@ function MessageInputForm() {
         delivery_status: "",
         timestamp: getCurrentTimestamp(),
       };
+      const responseData = await response.json();
       if (response.ok) {
-        const responseData = await response.json();
         offlineMessage._id = responseData.id;
         setUserMessages((n) => [...n, offlineMessage]);
         setMessage("");
         await socket.emit("update message", offlineMessage);
+      } else {
+        setErr(responseData.msg);
       }
     } catch (error) {
       setErr(error.message);
@@ -95,6 +100,7 @@ function MessageInputForm() {
         />
         <button type="submit" disabled={loading}>
           {loading ? (
+            // <MdScheduleSend color="yellow" className={styles.sendIcon} />
             <TailSpin
               color="white"
               visible={true}
@@ -108,7 +114,7 @@ function MessageInputForm() {
           ) : err === "" ? (
             <IoSend className={styles.sendIcon} />
           ) : (
-            <p>retry</p>
+            <MdCancelScheduleSend className={styles.sendIcon} />
           )}
         </button>
       </div>

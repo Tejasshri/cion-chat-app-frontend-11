@@ -131,9 +131,14 @@ const UserMessagesSection = () => {
       };
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
-      console.log(responseData);
-      setUserMessages(responseData.data);
-      setMessageApiStatus(apiStatusConstants.success);
+      if (response.ok) {
+        console.log("Okay");
+        setUserMessages(responseData.data);
+        setMessageApiStatus(apiStatusConstants.success);
+      } else {
+        console.log("Otherwise");
+        setMessageApiStatus(apiStatusConstants.failure);
+      }
     } catch (error) {
       setMessageApiStatus(apiStatusConstants.failure);
     }
@@ -157,7 +162,17 @@ const UserMessagesSection = () => {
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
       if (response.ok) {
-        setUserMessages((r) => [...responseData.data, ...r]);
+        let i = 0;
+        let timer = setInterval(() => {
+          if (i === responseData.data.length) {
+            clearInterval(timer);
+          } else {
+            console.log(responseData.data.at(-i));
+            setUserMessages((r) => [responseData.data.at(-i), ...r]);
+          }
+          i++;
+        }, 50);
+        // setUserMessages((r) => [...responseData.data, ...r]);
       } else {
         setErr("Something went wrong");
       }
@@ -205,10 +220,7 @@ const UserMessagesSection = () => {
   const handleScroll = (event) => {
     const { scrollTop, clientHeight, scrollHeight } = event.target;
 
-    if (
-      scrollTop === 0 &&
-      messageApiStatus !== apiStatusConstants.in_progress
-    ) {
+    if (scrollTop === 0 && messageApiStatus === apiStatusConstants.success) {
       limit.current++;
       addNewMessages();
     }
@@ -223,7 +235,6 @@ const UserMessagesSection = () => {
         {isLoading && <TailSpin height={20} width={20} color="violet" />}
         {err && <IoReloadCircleOutline size={20} color="red" />}
       </button>
-
       {getChatView()}
     </div>
   );
