@@ -36,7 +36,7 @@ function MessageInputForm() {
   }, []);
 
   function getCurrentTimestamp() {
-    return Math.floor(Date.now() / 1000); // Divide by 1000 to convert milliseconds to seconds
+    return Math.floor(Date.now() / 1000); 
   }
 
   const sendMessage = async (event) => {

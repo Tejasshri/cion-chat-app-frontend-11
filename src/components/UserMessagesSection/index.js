@@ -167,7 +167,7 @@ const UserMessagesSection = () => {
           if (i === responseData.data.length) {
             clearInterval(timer);
           } else {
-            console.log(responseData.data.at(-i));
+            // console.log(responseData.data.at(-i));
             setUserMessages((r) => [responseData.data.at(-i), ...r]);
           }
           i++;
