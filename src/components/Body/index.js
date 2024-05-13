@@ -9,11 +9,19 @@ import { webUrl } from "../../Common";
 import socket from "../../Socket";
 
 export default function Body() {
-  const { selectedUser, userMessages, setUserMessages, setScroll } =
-    useContext(ReactContext);
+  const {
+    setUsers,
+    users,
+    selectedUser,
+    userMessages,
+    setUserMessages,
+    setScroll,
+  } = useContext(ReactContext);
+  console.log(selectedUser);
+
   const fetchMessage = async (data) => {
     try {
-      if (selectedUser.patient_phone_number !== data.userNumber) return;
+      // if (selectedUser.patient_phone_number !== data.userNumber) return;
       await userMessages.forEach((element) => {
         console.log(element, data, "data");
       });
@@ -29,6 +37,7 @@ export default function Body() {
       });
       const responseData = await response.json();
       if (response.ok) {
+        if (responseData.data.type === "reaction") return;
         // let isMessageExists = false;
         // userMessages.forEach((element) => {
         //   console.log(element.id === responseData.data.id);
@@ -45,13 +54,27 @@ export default function Body() {
         // }
         setUserMessages((prevState) => [...prevState, responseData.data]);
         setScroll((n) => !n);
+        let updatedUsers = users.map((each) => {
+          if (each.patient_phone_number === responseData.data.from) {
+            return {
+              ...each,
+              message_ids: [...each.message_ids, responseData.data.id],
+              lastMessage: responseData.data,
+            };
+          }
+          return each;
+        });
+        updatedUsers = updatedUsers.sort((user1, user2) => {
+          return user2.lastMessage.timestamp - user1.lastMessage.timestamp;
+        });
+        setUsers(updatedUsers);
       } else {
         console.log(responseData, "error");
-        alert("Please Refresh the page");
+        alert("Please Refresh the page" + responseData);
       }
     } catch (error) {
       console.log(error);
-      alert("Please Refresh the page");
+      alert("Please Refresh the page " + error.message);
     }
   };
   useEffect(() => {
@@ -71,7 +94,8 @@ export default function Body() {
       socket.off("update user message");
       socket.off("update patient");
     };
-  }, [selectedUser, userMessages]);
+  }, [selectedUser, userMessages, users]);
+
   return (
     <div className={styles.body}>
       <Sidebar />
