@@ -14,11 +14,13 @@ import styles from "./index.module.css";
 import ReactContext from "../../context/ReactContext";
 
 const MessageUpdated = (props) => {
-  const { messageData } = props;
-  const [showReactions, setShowReactions] = useState(false);
-  const { type, message_type, timestamp, media_data, reactions } = messageData;
   const [docApiStatus, setDocApiStatus] = useState(apiStatusConstants.initial);
+  const [showReactions, setShowReactions] = useState(false);
+  const { messageData } = props;
   const { setUserMessages, selectedUser } = useContext(ReactContext);
+  if (!messageData) return "something unexpected";
+  const { type, message_type, timestamp, media_data, reactions } = messageData;
+  
 
   const updateDocData = async () => {
     try {
@@ -36,7 +38,9 @@ const MessageUpdated = (props) => {
       };
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
-      console.log(responseData.data);
+
+      console.log(responseData)
+
       if (response.ok) {
         setUserMessages((n) =>
           n.map((each) => {

@@ -1,0 +1,96 @@
+.featureBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    margin-right: 0.3rem;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  .addFilesDiv {
+    /* height: 5rem; */
+    width: 3.5rem;
+    border-radius: 0.1rem;
+    position: absolute;
+    top: -2rem;
+    /* border: 1px solid red; */
+    left: 1rem;
+    background-color: white;
+    box-shadow: 0 4px 16px 0 #bfbfbf;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+  }
+  
+  .fileUploadDiv {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.1rem;
+  }
+  
+  .fileUploadDiv input[type="file"] {
+    display: none;
+  }
+  .fileUploadDiv label {
+    font-size: 0.4rem;
+    display: flex;
+    align-items: center;
+    color: grey;
+    cursor: pointer;
+  }
+  
+  .fileUploadDiv label svg {
+    margin-right: 0.2rem;
+    font-size: 0.5rem;
+  }
+  
+  * {
+    /* border: 1px solid red; */
+  }
+  .previewContainer {
+    top: 0;
+    height: 5rem;
+    width: 7rem;
+    /* border: 1px solid red; */
+    position: absolute;
+    top: -5rem;
+    left: 4rem;
+    border-radius: 0.2rem;
+  }
+  
+  .previewContainer > div {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 4px 16px 0 black !important;
+    border-radius: 0.2rem;
+  }
+  
+  .previewContainer button {
+    position: absolute;
+    right: -.8rem;
+    bottom: -.8rem;
+    /* background-color: red; */
+    z-index: 1000;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: var(--brandColor);
+    border-radius: 50%;
+    border: 0;
+    color: white;
+    outline: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

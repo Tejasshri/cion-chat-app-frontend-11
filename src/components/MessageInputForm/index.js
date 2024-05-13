@@ -9,6 +9,8 @@ import { MdCancelScheduleSend } from "react-icons/md";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 
+import MoreInputFeatures from "../MoreInputFeatures/index.js";
+
 import styles from "./index.module.css";
 import { webUrl } from "../../Common";
 import ReactContext from "../../context/ReactContext";
@@ -81,24 +83,6 @@ function MessageInputForm() {
       socket.off("update message");
     };
   }, [selectedUser]);
-
-  const updateFile = async () => {
-    try {
-      if (!file) return;
-      const formData = new FormData();
-      formData.append("file", file);
-      console.log(file);
-      formData.append("to", selectedUser.patient_phone_number);
-      const response = fetch("http://localhost:3005/recieve-media", {
-        method: "POST",
-        body: formData,
-      });
-      const responseData = await response.json();
-      if (responseData.ok) {
-      }
-    } catch (error) {}
-    console.log(file);
-  };
 
   function getCurrentTimestamp() {
     return Math.floor(Date.now() / 1000);
@@ -182,81 +166,20 @@ function MessageInputForm() {
     }
   };
 
-  const dataPreview = () => {
-    return (
-      preview && (
-        <div className={styles.previewContainer} id="preview-container">
-          <div>
-            {preview.startsWith("data:image") && (
-              <img
-                src={preview}
-                alt="Preview"
-                height="100%"
-                // width="100%"
-              />
-            )}
-            {preview.startsWith("data:video") && (
-              <video controls style={{ maxWidth: "100%", maxHeight: "300px" }}>
-                <source src={preview} type={preview.type} />
-                Your browser does not support the video tag.
-              </video>
-            )}
-            {preview.startsWith("data:application/pdf") && (
-              <embed
-                src={preview}
-                type="application/pdf"
-                width="100%"
-                height="300px"
-              />
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={updateFile}
-            className={styles.sendFileBtn}>
-            <IoSend />
-          </button>
-        </div>
-      )
-    );
-  };
-
-  const getDocMenu = () => {
-    return (
-      showDocMenu && (
-        <div className={styles.addFilesDiv}>
-          <div className={styles.fileUploadDiv}>
-            <input
-              onChange={onUpdateFile}
-              type="file"
-              id="file"
-              accept="image/jpeg, image/png, video/mp4"
-            />
-            <label htmlFor="file">
-              <MdOutlineInsertPhoto />
-              Photo & Video
-            </label>
-          </div>
-          <div className={styles.fileUploadDiv}>
-            <input
-              onChange={(e) => setFolder(e.target)}
-              type="file"
-              id="documents"
-              accept=".pdf,video/*,image/*"
-            />
-            <label htmlFor="documents">
-              <MdOutlineInsertPhoto />
-              Document
-            </label>
-          </div>
-        </div>
-      )
-    );
-  };
 
   return (
     <form className={styles.messageForm} onSubmit={sendMessage}>
-      
+      <MoreInputFeatures
+        preview={preview}
+        file={file}
+        setFile={setFile}
+        folder={folder}
+        setFolder={setFolder}
+        setPreview={setPreview}
+        showDocMenu={showDocMenu}
+        setShowDocMenu={setShowDocMenu}
+        socket={socket}
+      />
       <div className={styles.inputDiv}>
         <input
           type="text"

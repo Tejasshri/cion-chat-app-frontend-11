@@ -1,6 +1,34 @@
 import styles from "./index.module.css";
 
-const MoreInputFeatures = ({ setShowDocMenu, showDocMenu }) => {
+import { IoSend } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa";
+// import { IoSend } from "react-icons/io5";
+import { MdScheduleSend } from "react-icons/md";
+import { PiNotePencilFill } from "react-icons/pi";
+import { MdCancelScheduleSend } from "react-icons/md";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
+import { MdOutlineInsertPhoto } from "react-icons/md";
+import { useContext, useState } from "react";
+import ReactContext from "../../context/ReactContext";
+import { TailSpin } from "react-loader-spinner";
+
+const MoreInputFeatures = (props) => {
+  const {
+    showDocMenu,
+    setShowDocMenu,
+    preview,
+    file,
+    setFile,
+    folder,
+    setFolder,
+    setPreview,
+    socket,
+  } = props;
+  const { selectedUser, setUserMessages, users, setUsers } =
+    useContext(ReactContext);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+
   const dataPreview = () => {
     return (
       preview && (
@@ -31,9 +59,15 @@ const MoreInputFeatures = ({ setShowDocMenu, showDocMenu }) => {
           </div>
           <button
             type="button"
-            onClick={updateFile}
+            onClick={sendFile}
             className={styles.sendFileBtn}>
-            <IoSend />
+            {loading ? (
+              <TailSpin height={20} width={20} color="white" />
+            ) : err !== "" ? (
+              <MdCancelScheduleSend size={30} color="white" />
+            ) : (
+              <IoSend />
+            )}
           </button>
         </div>
       )
@@ -72,12 +106,91 @@ const MoreInputFeatures = ({ setShowDocMenu, showDocMenu }) => {
       )
     );
   };
-  
+
+  const sendFile = async () => {
+    try {
+      setLoading(true);
+      setErr("");
+      if (!file) return;
+      let type = file.type.split("/")[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      console.log(file);
+      formData.append("to", selectedUser.patient_phone_number);
+      const response = await fetch("http://localhost:3005/recieve-media", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+      const responseData = await response.json();
+      console.clear();
+      console.log(responseData);
+      if (response.ok) {
+        let offlineFileMessage = {
+          _id: responseData.data.id,
+          from: selectedUser.patient_phone_number,
+          id: responseData.data.whatsappMessageId,
+          timestamp: 1715326688,
+          type: type,
+          [type]: {
+            filename: file.name,
+            mime_type: file.type,
+            sha256: "",
+            id: "",
+          },
+          message_type: "Outgoing",
+          reactions: [],
+          delivery_status: "",
+        };
+        setUserMessages((n) => [...n, offlineFileMessage]);
+        console.log(offlineFileMessage, users);
+        let updatedUsers = users.map((each) => {
+          if (each.patient_phone_number === offlineFileMessage.from) {
+            return {
+              ...each,
+              lastMessage: offlineFileMessage,
+            };
+          }
+          return each;
+        });
+        updatedUsers = updatedUsers.sort((user1, user2) => {
+          return user2.lastMessage.timestamp - user1.lastMessage.timestamp;
+        });
+        setUsers(updatedUsers);
+        setFile(null);
+        setPreview(false);
+        socket.emit("update message", offlineFileMessage);
+      } else {
+        setErr(responseData.msg || "Something Unexpected");
+      }
+    } catch (error) {
+      console.log(error.message);
+      setErr(error.message);
+    } finally {
+      setLoading(false);
+    }
+    console.log(file);
+  };
+
+  const onUpdateFile = (event) => {
+    const file = event.target.files[0];
+    setFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setPreview(event.target.result);
+      };
+      reader.readAsDataURL(file);
+      setShowDocMenu(false);
+    }
+  };
+
   return (
     <>
-      <MoreInputFeatures />
-      {dataPreview()}
       {getDocMenu()}
+      {dataPreview()}
       <button type="button" className={styles.featureBtn}>
         <MdOutlineEmojiEmotions size={20} color="violet" />
       </button>
@@ -93,3 +206,5 @@ const MoreInputFeatures = ({ setShowDocMenu, showDocMenu }) => {
     </>
   );
 };
+
+export default MoreInputFeatures;
