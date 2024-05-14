@@ -77,6 +77,29 @@ export default function Body() {
       alert("Please Refresh the page " + error.message);
     }
   };
+
+  const fetchPatient = async (userNumber) => {
+    try {
+      const response = await fetch(`${webUrl}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_number: userNumber,
+        }),
+      });
+      const responseData = await response.json();
+      if (response.ok) {
+        setUsers((users) => [...users, responseData.data]);
+      } else {
+        alert("Please Refresh");
+      }
+    } catch (error) {
+      alert("Please Refresh");
+      console.log(error);
+    }
+  };
   useEffect(() => {
     socket.connect();
     socket.on("connect", () => {
@@ -87,7 +110,8 @@ export default function Body() {
       fetchMessage(data);
     });
     socket.on("update patient", (data) => {
-      console.log("Update Patient", data);
+      console.log("Update Patient", data.userNumber);
+      fetchPatient(data.userNumber);
     });
     return () => {
       socket.disconnect();

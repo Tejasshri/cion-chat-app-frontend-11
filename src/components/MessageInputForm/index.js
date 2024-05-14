@@ -64,9 +64,13 @@ function MessageInputForm() {
   //   }
   // }, [file]);
 
-  useEffect(() => {
+  const focus = () => {
     const inputEl = document.getElementById("message-input");
     inputEl.focus();
+  };
+
+  useEffect(() => {
+    focus();
     socket.on("connect", async () => {
       socket.emit("join", "Joined");
       socket.emit("join room", "appu", selectedUser.from);
@@ -166,7 +170,6 @@ function MessageInputForm() {
     }
   };
 
-
   return (
     <form className={styles.messageForm} onSubmit={sendMessage}>
       <MoreInputFeatures
@@ -179,6 +182,7 @@ function MessageInputForm() {
         showDocMenu={showDocMenu}
         setShowDocMenu={setShowDocMenu}
         socket={socket}
+        focus={focus}
       />
       <div className={styles.inputDiv}>
         <input
@@ -186,7 +190,6 @@ function MessageInputForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           id="message-input"
-          disabled={loading || file !== null}
         />
         <button type="submit" disabled={loading || file !== null}>
           {loading ? (

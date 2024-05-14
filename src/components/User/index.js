@@ -44,6 +44,7 @@ const User = (props) => {
   };
 
   const getNameFirstLetter = (name) => {
+    console.log(name)
     if (!isEscapeCharacter(name[0])) {
       return name[0];
     }
@@ -58,7 +59,7 @@ const User = (props) => {
         setSelectedUser(userDetails);
       }}>
       {!imageUrl ? (
-        <div className={styles.imageDiv}>{getNameFirstLetter(name)}</div>
+        <div className={styles.imageDiv}>{getNameFirstLetter(name) || ""}</div>
       ) : (
         <img src={imageUrl} alt="" />
       )}

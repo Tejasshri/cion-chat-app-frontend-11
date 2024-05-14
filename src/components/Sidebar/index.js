@@ -11,12 +11,13 @@ function Sidebar() {
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState("");
 
-
   const getUserData = async () => {
     try {
-      setErr("")
+      setErr("");
       setIsLoading(true);
-      const response = await fetch(`${webUrl}/users`);
+      const response = await fetch(`${webUrl}/users`, {
+        method: "POST",
+      });
       if (response.ok) {
         const data = await response.json();
         console.log(data, "Okay");
@@ -25,7 +26,7 @@ function Sidebar() {
         setErr("Failed to get");
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       setErr(error.message);
     } finally {
       setIsLoading(false);

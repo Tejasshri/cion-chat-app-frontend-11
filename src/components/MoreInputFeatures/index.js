@@ -14,6 +14,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const MoreInputFeatures = (props) => {
   const {
+    focus,
     showDocMenu,
     setShowDocMenu,
     preview,
@@ -24,7 +25,7 @@ const MoreInputFeatures = (props) => {
     setPreview,
     socket,
   } = props;
-  const { selectedUser, setUserMessages, users, setUsers } =
+  const { selectedUser, setUserMessages, users, setUsers, setScroll } =
     useContext(ReactContext);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
@@ -96,6 +97,7 @@ const MoreInputFeatures = (props) => {
               type="file"
               id="documents"
               accept=".pdf,video/*,image/*"
+              disabled
             />
             <label htmlFor="documents">
               <MdOutlineInsertPhoto />
@@ -145,6 +147,7 @@ const MoreInputFeatures = (props) => {
           delivery_status: "",
         };
         setUserMessages((n) => [...n, offlineFileMessage]);
+        setScroll((n) => !n);
         console.log(offlineFileMessage, users);
         let updatedUsers = users.map((each) => {
           if (each.patient_phone_number === offlineFileMessage.from) {
@@ -161,6 +164,7 @@ const MoreInputFeatures = (props) => {
         setUsers(updatedUsers);
         setFile(null);
         setPreview(false);
+        focus();
         socket.emit("update message", offlineFileMessage);
       } else {
         setErr(responseData.msg || "Something Unexpected");
