@@ -69,14 +69,14 @@ function MessageInputForm() {
     inputEl.focus();
   };
 
-  useEffect(() => {
-    setShowDocMenu(false);
-    setMessage("");
-    setErr("");
-    setFile(null);
-    setFolder(null);
-    setPreview(null);
-  }, [selectedUser]);
+  // useEffect(() => {
+  //   setShowDocMenu(false);
+  //   setMessage("");
+  //   setErr("");
+  //   setFile(null);
+  //   setFolder(null);
+  //   setPreview(null);
+  // }, [selectedUser]);
 
   useEffect(() => {
     focus();

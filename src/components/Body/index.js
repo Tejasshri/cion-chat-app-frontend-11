@@ -52,8 +52,11 @@ export default function Body() {
         //   });
         //   return;
         // }
-        setUserMessages((prevState) => [...prevState, responseData.data]);
-        setScroll((n) => !n);
+        if (selectedUser?.patient_phone_number === data.userNumber) {
+          setUserMessages((prevState) => [...prevState, responseData.data]);
+          setScroll((n) => !n);
+        }
+
         let updatedUsers = users.map((each) => {
           if (each.patient_phone_number === responseData.data.from) {
             return {
