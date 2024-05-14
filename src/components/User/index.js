@@ -44,7 +44,6 @@ const User = (props) => {
   };
 
   const getNameFirstLetter = (name) => {
-    console.log(name)
     if (!isEscapeCharacter(name[0])) {
       return name[0];
     }

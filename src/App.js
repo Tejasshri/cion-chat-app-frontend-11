@@ -22,6 +22,9 @@ export default function App() {
   const [userMessages, setUserMessages] = useState([]);
   const [selectedUser, setSelectedUser] = useState(undefined);
   const [scroll, setScroll] = useState(false);
+  
+  console.log(users)
+ 
 
   return (
     <ReactContext.Provider
