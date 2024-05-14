@@ -40,6 +40,7 @@ const MoreInputFeatures = (props) => {
                 src={preview}
                 alt="Preview"
                 height="100%"
+                draggable={false}
                 // width="100%"
               />
             )}
@@ -63,9 +64,9 @@ const MoreInputFeatures = (props) => {
             onClick={sendFile}
             className={styles.sendFileBtn}>
             {loading ? (
-              <TailSpin height={20} width={20} color="white" />
+              <TailSpin height={30} width={30} color="white" />
             ) : err !== "" ? (
-              <MdCancelScheduleSend size={30} color="white" />
+              <MdCancelScheduleSend color="white" />
             ) : (
               <IoSend />
             )}

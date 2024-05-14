@@ -214,6 +214,7 @@ const UserMessagesSection = () => {
         return <FailureView refresh={getMessages} />;
       case apiStatusConstants.success:
         return getSuccessView();
+      
     }
   };
 

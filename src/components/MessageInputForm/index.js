@@ -70,6 +70,16 @@ function MessageInputForm() {
   };
 
   useEffect(() => {
+    setShowDocMenu(false);
+    setMessage("");
+    setErr("");
+    setLoading("false");
+    setFile(null);
+    setFolder(null);
+    setPreview(null);
+  }, [selectedUser]);
+
+  useEffect(() => {
     focus();
     socket.on("connect", async () => {
       socket.emit("join", "Joined");
@@ -193,7 +203,6 @@ function MessageInputForm() {
         />
         <button type="submit" disabled={loading || file !== null}>
           {loading ? (
-            // <MdScheduleSend color="yellow" className={styles.sendIcon} />
             <TailSpin
               color="white"
               visible={true}
