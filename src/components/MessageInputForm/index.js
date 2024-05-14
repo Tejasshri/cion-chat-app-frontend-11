@@ -73,7 +73,6 @@ function MessageInputForm() {
     setShowDocMenu(false);
     setMessage("");
     setErr("");
-    setLoading("false");
     setFile(null);
     setFolder(null);
     setPreview(null);
