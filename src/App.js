@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Pages
 import ChatApp from "./pages/ChatApp";
 
-// Componnets
-import Navbar from "./components/Navbar";
-import ContactsList from "./components/ContactsList";
-import ChatSection from "./components/ChatSection";
+// Components
 
 //Context
 import ReactContext from "./context/ReactContext";
@@ -14,17 +13,14 @@ import ReactContext from "./context/ReactContext";
 // Styles in module
 import "./App.css";
 
-import socket from "./Socket";
-import { webUrl } from "./Common";
+import LoginPage from "./pages/LoginPage";
 
 export default function App() {
   const [users, setUsers] = useState([]);
   const [userMessages, setUserMessages] = useState([]);
   const [selectedUser, setSelectedUser] = useState(undefined);
   const [scroll, setScroll] = useState(false);
-  
-  console.log(users)
- 
+
 
   return (
     <ReactContext.Provider
@@ -38,7 +34,12 @@ export default function App() {
         scroll,
         setScroll,
       }}>
-      <ChatApp />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<ChatApp />} />
+        </Routes>
+      </BrowserRouter>
     </ReactContext.Provider>
   );
 }

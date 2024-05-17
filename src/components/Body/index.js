@@ -94,7 +94,7 @@ export default function Body() {
       });
       const responseData = await response.json();
       if (response.ok) {
-        console.log(responseData);
+        console.log(responseData, "Response Data");
         setUsers((users) => [...users, responseData.data]);
       } else {
         alert("Please Refresh");

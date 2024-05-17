@@ -77,6 +77,7 @@ const Message = (props) => {
   };
 
   const getDocView = () => {
+    return
     switch (docApiStatus) {
       case apiStatusConstants.in_progress:
         return (

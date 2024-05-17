@@ -1,7 +1,6 @@
-
 aside {
   width: 30%;
-  background: rgb(233, 233, 233);
+  background: rgb(255, 255, 255);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -75,12 +74,11 @@ aside {
   height: 2rem;
   padding-left: 10px;
   border-bottom: 1px solid rgb(202, 199, 199);
-  
+  cursor: pointer;
 }
 
-.userList li:hover{
-  background-color: rgba(204, 204, 204, .3);
-  cursor: pointer;
+.userList li:hover {
+  background-color: rgba(204, 204, 204, 0.3);
 }
 .userList li img {
   height: 50px;
@@ -106,7 +104,6 @@ aside {
   color: var(--paragraphColor);
   margin: 0;
   padding: 0;
-  
 }
 
 .userPlaceholder {
@@ -146,7 +143,7 @@ aside {
   }
 }
 
-.errorView{
+.errorView {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -161,25 +158,25 @@ aside {
 .errorView img {
   height: 2rem;
   width: 2rem;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 
-.errorView h1{
-  font-size: .6rem;
+.errorView h1 {
+  font-size: 0.6rem;
   font-weight: 600;
 }
 
-.errorView p{
-  font-size: .4rem;
+.errorView p {
+  font-size: 0.4rem;
   font-weight: 600;
   color: gray;
 }
 
-.errorView button{
+.errorView button {
   background-color: rgb(14, 120, 242);
   border: 0;
-  padding: .1rem .3rem;
+  padding: 0.1rem 0.3rem;
   color: white;
-  border-radius: .1rem;
-  margin-top: .2rem;
+  border-radius: 0.1rem;
+  margin-top: 0.2rem;
 }

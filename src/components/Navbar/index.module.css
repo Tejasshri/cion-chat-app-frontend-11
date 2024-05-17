@@ -28,6 +28,14 @@ nav li {
   /* animation: blink 1s linear infinite; */
 }
 
+.logInNavBtn{
+  padding: .1rem .6rem;
+  font-size: .5rem;
+  font-weight: 600;
+  color: var(--brandColor);
+  
+}
+
 /* *{
     font-family: 'Times New Roman', Times, serif;
     padding: 0;
@@ -72,3 +80,4 @@ nav button{
     opacity: 1;
   }
 }
+

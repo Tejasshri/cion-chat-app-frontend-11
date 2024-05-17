@@ -16,6 +16,10 @@
   flex-shrink: 0;
 }
 
+/* .message:has(.imageDiv){
+  padding: 1rem;
+} */
+
 .message p {
   font-size: 0.4rem;
   color: var(--paragraphColor);
@@ -29,7 +33,7 @@
 }
 
 .message:has(.imageDiv) {
-  padding: 0;
+  padding: 0.2rem;
 }
 
 .imageDiv {
@@ -54,7 +58,9 @@
   flex-direction: column;
   align-items: center;
   z-index: 1000;
-  background-color: #dadada;
+  background-color: #dfffd5;
+  border-radius: .1rem;
+  padding: .15rem;
 }
 .videoDiv video {
   max-height: 100%;
@@ -149,6 +155,8 @@ audio {
   color: var(--brandColor);
   align-self: center;
   height: 1rem !important;
+  /* padding: 1rem; */
+  /* border: 50px solid red; */
 }
 
 .outgoingMessage {
@@ -256,11 +264,11 @@ audio {
 
 .reactionDiv {
   position: absolute;
-  bottom: -.3rem;
-  left: .3rem;
+  bottom: -0.3rem;
+  left: 0.3rem;
   box-shadow: 0 4px 16px 0 #bfbfbf;
   background-color: white;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -268,15 +276,15 @@ audio {
 }
 
 .reactionDiv p {
-  font-size: .3rem;
+  font-size: 0.3rem;
 }
 
 .outgoingMessage .reactionDiv {
   left: unset;
-  right: .3rem;
+  right: 0.3rem;
 }
 
-.reactionUser{
+.reactionUser {
   position: absolute;
   left: unset;
   right: -3rem;
@@ -285,12 +293,41 @@ audio {
   box-shadow: 0 4px 16px 0 #bfbfbf;
   min-width: 1rem;
   min-width: 2rem;
-  border-radius: .2rem;
-  padding: .1rem;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
 }
 
-.outgoingMessage .reactionUser{
+.outgoingMessage .reactionUser {
   left: -3rem;
   top: 0;
   right: unset;
+}
+
+.compressedImageDiv {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.compressedImageDiv img {
+  filter: blur(3px);
+}
+
+.compressedImageDiv .docImage {
+  border: 0;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.1rem;
+  opacity: 0.7;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: initial;
 }

@@ -5,8 +5,8 @@
   flex-direction: column;
   padding: 0.4rem;
   overflow-y: auto;
-  background-color: #fbfafa;
   position: relative;
+  background-image: url(../../../public/chatbackgroundimage.png);
 }
 
 .leftSkeltonMessage {

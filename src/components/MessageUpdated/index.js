@@ -1,12 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { FaRegPlayCircle, FaMapMarkerAlt, FaImage } from "react-icons/fa";
 import { IoDocument } from "react-icons/io5";
 
 import { MdDownloadForOffline, MdError } from "react-icons/md";
+import { MdOutlineFileDownload } from "react-icons/md";
 import { AiFillAudio } from "react-icons/ai";
+import { RiDownloadLine } from "react-icons/ri";
 
-import { Discuss } from "react-loader-spinner";
+import { Discuss, TailSpin } from "react-loader-spinner";
 
 import { apiStatusConstants, timestampToDateTime, webUrl } from "../../Common";
 
@@ -17,10 +19,11 @@ const MessageUpdated = (props) => {
   const [docApiStatus, setDocApiStatus] = useState(apiStatusConstants.initial);
   const [showReactions, setShowReactions] = useState(false);
   const { messageData } = props;
-  const { setUserMessages, selectedUser } = useContext(ReactContext);
+  const { userMessages, setUserMessages, selectedUser } =
+    useContext(ReactContext);
+
   if (!messageData) return "something unexpected";
   const { type, message_type, timestamp, media_data, reactions } = messageData;
-  
 
   const updateDocData = async () => {
     try {
@@ -39,7 +42,7 @@ const MessageUpdated = (props) => {
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
 
-      console.log(responseData)
+      console.log(responseData);
 
       if (response.ok) {
         setUserMessages((n) =>
@@ -94,21 +97,23 @@ const MessageUpdated = (props) => {
 
   const loader = () => (
     <div className={styles.imageLoader}>
-      <Discuss
+      <TailSpin
         style={{ margin: "auto" }}
         visible={true}
-        height="60"
-        width="60"
+        height="30"
+        width="30"
         ariaLabel="discuss-loading"
         wrapperStyle={{}}
         wrapperClass="discuss-wrapper"
-        color="green"
+        color="violet"
         backgroundColor="white"
       />
     </div>
   );
 
   const imageSuccessView = () => {
+    if (!media_data && docApiStatus !== apiStatusConstants.initial)
+      return setDocApiStatus(apiStatusConstants.initial);
     let { image: docData } = messageData;
     let { image: dataBuffer } = media_data;
     return (
@@ -176,6 +181,11 @@ const MessageUpdated = (props) => {
   };
 
   const skeltonImage = () => {
+    console.log(
+      type,
+      messageData?.compressedImage,
+      messageData?.image?.mime_type
+    );
     if (type === "video")
       return (
         <FaRegPlayCircle
@@ -201,6 +211,35 @@ const MessageUpdated = (props) => {
         />
       );
     else if (type === "document") return "";
+    else if (type === "image" && messageData.compressedImage) {
+      return (
+        <div className={styles.compressedImageDiv}>
+          <img
+            style={{
+              height: "100%",
+            }}
+            src={`data:${
+              messageData.image.mime_type
+            };base64,${messageData.compressedImage.toString("base64")}`}
+            alt="image"
+          />
+          <button className={styles.docImage} onClick={() => updateDocData()}>
+            <RiDownloadLine color="white" />
+          </button>
+        </div>
+      );
+    } else if (type === "image" && messageData.offlinePreview) {
+      return (
+        <img
+          onClick={() => updateDocData()}
+          style={{
+            height: "100%",
+          }}
+          src={messageData.offlinePreview}
+          alt="image"
+        />
+      );
+    }
     return (
       <FaImage
         size={80}
