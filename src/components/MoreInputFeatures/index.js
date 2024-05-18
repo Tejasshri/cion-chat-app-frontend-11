@@ -57,7 +57,13 @@ const MoreInputFeatures = (props) => {
     return (
       preview && (
         <div className={styles.previewContainer} id="preview-container">
-          <button className={styles.closeBtn} onClick={() => setPreview(null)}>
+          <button
+            className={styles.closeBtn}
+            onClick={() => {
+              setPreview(null);
+              setFile(null);
+              setFolder(null);
+            }}>
             <MdClose />
           </button>
           <div>
@@ -168,7 +174,7 @@ const MoreInputFeatures = (props) => {
       );
 
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData);
       if (response.ok) {
         let offlineFileMessage = {
           _id: responseData.data.id,
