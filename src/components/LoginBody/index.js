@@ -95,7 +95,6 @@ function LoginBody() {
         },
         body: JSON.stringify(data),
       };
-      let webUrl = "http://localhost:3005";
       const response = await fetch(`${webUrl}/coach/login`, options);
       const responseData = await response.json();
       if (response.ok) {
