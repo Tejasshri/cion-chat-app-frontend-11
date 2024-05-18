@@ -98,6 +98,7 @@ const MoreInputFeatures = (props) => {
 
   const onUpdateFolder = (event) => {
     const folderItem = event.target.files[0];
+    console.log(folderItem);
     setFolder(folderItem);
     if (folderItem) {
       const reader = new FileReader();
@@ -130,7 +131,7 @@ const MoreInputFeatures = (props) => {
               onChange={onUpdateFolder}
               type="file"
               id="documents"
-              accept=".pdf,video/*,image/*,.zip,application/zip"
+              accept="audio/aac, audio/mp4, audio/mpeg, audio/amr, audio/ogg, audio/opus, application/vnd.ms-powerpoint, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.presentationml.presentation, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/pdf, text/plain, application/vnd.ms-excel, image/jpeg, image/png, image/webp, video/mp4, video/3gpp"
             />
             <label htmlFor="documents">
               <MdOutlineInsertPhoto />

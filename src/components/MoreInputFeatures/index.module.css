@@ -66,6 +66,7 @@ button {
   top: -5rem;
   left: 4rem;
   border-radius: 0.2rem;
+  z-index: 1005;
 }
 
 .previewContainer > div {

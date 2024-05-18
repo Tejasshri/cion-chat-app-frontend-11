@@ -3,20 +3,18 @@ import React, { useState } from "react";
 
 // Components
 import Navbar from "../../components/Navbar";
-import LoginBody from "../../components/LoginBody";
+import ResgisterBody from "../../components/RegisterBody";
 
 // Styles Module
 import styles from "./index.module.css";
 
-
-
-function LoginPage() {
+function RegisterPage() {
   return (
     <div className={styles.loginPage}>
-      <Navbar isPageLogin={true} />
-      <LoginBody />
+      <Navbar isPageRegister={true} />
+      <ResgisterBody />
     </div>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

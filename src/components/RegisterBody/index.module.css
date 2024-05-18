@@ -1,0 +1,128 @@
+.loginPageBody {
+  flex-grow: 1;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoginForm {
+  box-shadow: 0 2px 8px 0 var(--brandColor);
+  width: 10.5rem;
+  border-radius: 0.2rem;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginHeader h1 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1rem;
+  color: rgb(43, 43, 43);
+}
+
+.loginHeader p {
+  font-size: 0.45rem;
+  margin: 0;
+  color: grey;
+  font-weight: 400;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.3rem;
+}
+
+.inputContainer > input,
+.customPasswordInput {
+  border: 0;
+  height: 1.1rem;
+  background-color: rgb(243, 247, 255);
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 0.1rem;
+  display: flex;
+  align-items: center;
+  /* padding: 0 .5rem; */
+}
+
+.customPasswordInput > input {
+  background-color: transparent;
+  border: 0;
+  flex-grow: 1;
+  align-self: stretch;
+  outline: none;
+}
+
+input {
+  padding: 0 0.5rem;
+  outline: none;
+}
+
+.customPasswordInput > button {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: 0;
+  color: grey;
+  margin-right: 0.5rem;
+}
+
+.inputContainer label {
+  font-size: 0.5rem;
+  color: rgb(31, 31, 31);
+}
+
+.forgotPassordLink {
+  font-size: 0.4rem;
+  align-self: center;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--brandColor);
+  margin-top: 0.1rem;
+}
+
+* {
+  /* border: 1px solid red; */
+}
+
+.submitBtn,
+.registerBtn {
+  border: 0;
+  height: 1.3rem;
+  background-color: rgb(243, 247, 255);
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 0.1rem;
+  display: flex;
+  background-color: var(--brandColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.45rem;
+  font-weight: 400;
+  margin-top: 0.4rem;
+}
+
+.registerBtn {
+  background-color: rgb(245, 245, 245);
+  border-width: 1px;
+  font-size: 0.45rem;
+  color: var(--brandColor);
+  font-weight: 400;
+}
+
+.errorMsg{
+    color: red;
+    font-size: .3rem;
+    height: .4rem;
+}

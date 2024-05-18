@@ -14,13 +14,13 @@ import ReactContext from "./context/ReactContext";
 import "./App.css";
 
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 export default function App() {
   const [users, setUsers] = useState([]);
   const [userMessages, setUserMessages] = useState([]);
   const [selectedUser, setSelectedUser] = useState(undefined);
   const [scroll, setScroll] = useState(false);
-
 
   return (
     <ReactContext.Provider
@@ -37,6 +37,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<ChatApp />} />
         </Routes>
       </BrowserRouter>

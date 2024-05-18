@@ -5,6 +5,7 @@ import { useContext, useEffect, useState, memo } from "react";
 import ReactContext from "../../context/ReactContext";
 import User from "../User";
 import { webUrl } from "../../Common";
+import Cookies from 'js-cookie' ;
 
 function Sidebar() {
   const { users, setUsers, selectedUser } = useContext(ReactContext);
@@ -12,11 +13,15 @@ function Sidebar() {
   const [err, setErr] = useState("");
 
   const getUserData = async () => {
+    let token = Cookies.get('chat_token') ;
     try {
       setErr("");
       setIsLoading(true);
       const response = await fetch(`${webUrl}/users`, {
         method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       });
       if (response.ok) {
         const data = await response.json();

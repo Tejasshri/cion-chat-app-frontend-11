@@ -10,7 +10,12 @@ import { RiDownloadLine } from "react-icons/ri";
 
 import { Discuss, TailSpin } from "react-loader-spinner";
 
-import { apiStatusConstants, timestampToDateTime, webUrl } from "../../Common";
+import {
+  checkSingleEmoji,
+  apiStatusConstants,
+  timestampToDateTime,
+  webUrl,
+} from "../../Common";
 
 import styles from "./index.module.css";
 import ReactContext from "../../context/ReactContext";
@@ -61,10 +66,11 @@ const MessageUpdated = (props) => {
 
   const getDownloadButton = () => {
     try {
-      let { mime_type } = messageData[`${type}`];
+      let { mime_type, filename } = messageData[`${type}`];
+      console.log(mime_type);
       if (!mime_type) return <p>error</p>;
       let [dataName, dataExtension] = mime_type?.split("/") || [];
-      if (dataExtension === "pdf") {
+      if (mime_type.startsWith("application") || mime_type === "text/plain") {
         dataName = type;
       }
       return (
@@ -73,7 +79,7 @@ const MessageUpdated = (props) => {
           href={`data:${messageData[`${type}`]?.mime_type};base64,${media_data[
             `${dataName}`
           ].toString("base64")}`}
-          download={`data.${dataExtension}`}>
+          download={filename || `${filename}.${dataExtension}`}>
           <MdDownloadForOffline />
         </a>
       );
@@ -90,7 +96,13 @@ const MessageUpdated = (props) => {
 
   const textMessage = (body) => (
     <>
-      <p>{body}</p>
+      <p>
+        {checkSingleEmoji(body) ? (
+          <p className={styles.singleEmoji}>{body}</p>
+        ) : (
+          <p>{body}</p>
+        )}
+      </p>
       <span className={styles.time}>{timestampToDateTime(timestamp)}</span>
     </>
   );

@@ -1,11 +1,12 @@
+import { fromUnixTime } from "date-fns";
+
 let url = [
   "http://192.168.1.19:3005",
   "http://localhost:3005",
   "https://node-ccoplnfjedo.onrender.com",
 ];
 
-let webUrl = url[2];
-
+let webUrl = url[1];
 
 const apiStatusConstants = {
   initial: "INITIAL",
@@ -53,7 +54,7 @@ function timestampToDateTime(timestamp) {
   if (minutes < 10) {
     minutes = "0" + minutes.toString();
   }
-  
+
   let formattedDateTime;
 
   if (isDateMatched) {
@@ -85,6 +86,41 @@ function timestampToDateTime(timestamp) {
   return formattedDateTime;
 }
 
+// function timestampToDateTime(timestamp) {
+//   let dateObj = fromUnixTime(timestamp);
+//   let [hour, minute, date, month, year] = [
+//     dateObj.getHours(),
+//     dateObj.getMinutes(),
+//     dateObj.getDate(),
+//     dateObj.getMonth(),
+//     dateObj.getFullYear(),
+//   ];
+//   console.log(hour, minute, date, month, year);
+
+//   const currentDateObj = new Date();
+//   let [currentHour, currentMinute, currentDate, currentMonth, currentYear] = [
+//     currentDateObj.getHours(),
+//     currentDateObj.getMinutes(),
+//     currentDateObj.getDate(),
+//     currentDateObj.getMonth(),
+//     currentDateObj.getFullYear(),
+//   ];
+   
+  
+//   let condition =
+//     year === currentYear && date === currentDate && month === currentMonth;
+//   if (condition) return `Today ${hour}:${minute}` 
+//   return "working";
+// }
+
+function checkSingleEmoji(text) {
+  const emojiRegex = /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+  if (text.length === 2 && emojiRegex.test(text)){
+      return true
+  }
+  return false;
+}
+
 console.log(timestampToDateTime(1715518996));
 
-export { apiStatusConstants, webUrl, timestampToDateTime };
+export { apiStatusConstants, webUrl, timestampToDateTime, checkSingleEmoji };
