@@ -88,13 +88,11 @@ const MessageUpdated = (props) => {
 
   const textMessage = (body) => (
     <>
-      <p>
-        {checkSingleEmoji(body) ? (
-          <p className={styles.singleEmoji}>{body}</p>
-        ) : (
-          <p>{body}</p>
-        )}
-      </p>
+      {checkSingleEmoji(body) ? (
+        <p className={styles.singleEmoji}>{body}</p>
+      ) : (
+        <p>{body}</p>
+      )}
       <span className={styles.time}>{timestampToDateTime(timestamp)}</span>
     </>
   );

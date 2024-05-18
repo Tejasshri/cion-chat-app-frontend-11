@@ -56,11 +56,14 @@ function LoginBody() {
               replace: true,
             });
           } else {
-            toast.error("Invalid Token! Please Login");
+            console.log(responseData);
+            Cookies.remove("chat_token");
+            toast.error(responseData.msg || "Invalid Token! Please Login");
           }
         } catch (error) {
           console.log(error);
-          toast.error("Invalid Token! Please Login");
+          Cookies.remove("chat_token");
+          toast.error(error.message || "Invalid Token! Please Login");
         } finally {
           setLoading(false);
         }

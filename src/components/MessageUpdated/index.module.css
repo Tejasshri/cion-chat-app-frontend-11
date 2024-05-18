@@ -14,6 +14,7 @@
   justify-content: center;
   position: relative;
   flex-shrink: 0;
+  word-wrap: break-word;
 }
 
 /* .message:has(.imageDiv){
@@ -23,6 +24,8 @@
 .message p {
   font-size: 0.4rem;
   color: var(--paragraphColor);
+  word-wrap: break-word;
+  width: 100%;
 }
 .message span.time {
   position: absolute;
