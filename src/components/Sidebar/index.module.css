@@ -88,7 +88,7 @@ aside {
 }
 
 .userList li h1 {
-  font-size: 20px;
+  font-size: .5rem;
   color: var(--paragraphColor);
   color: black;
   font-weight: 500;

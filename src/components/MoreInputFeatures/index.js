@@ -168,6 +168,7 @@ const MoreInputFeatures = (props) => {
       );
 
       const responseData = await response.json();
+      console.log(responseData)
       if (response.ok) {
         let offlineFileMessage = {
           _id: responseData.data.id,
@@ -234,7 +235,6 @@ const MoreInputFeatures = (props) => {
         getOptions("POST", formData, true, true)
       );
       const responseData = await response.json();
-      console.clear();
       console.log(responseData);
       if (response.ok) {
         let offlineFileMessage = {
