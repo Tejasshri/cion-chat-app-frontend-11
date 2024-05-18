@@ -1,5 +1,5 @@
 // From React
-import { useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 // Styles Module
 import styles from "./index.module.css";
@@ -15,6 +15,7 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { webUrl } from "../../Common";
 import { TailSpin } from "react-loader-spinner";
+import ReactContext from "../../context/ReactContext";
 
 // Empty User (initial User)
 const initialUser = {
@@ -28,6 +29,44 @@ function LoginBody() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(ReactContext);
+
+  const token = useMemo(() => {
+    return Cookies.get("chat_token");
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      (async () => {
+        try {
+          toast.warning("Wait we are verifying you");
+          setLoading(true);
+          const options = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          const response = await fetch(`${webUrl}/verify`, options);
+          const responseData = await response.json();
+          if (response.ok) {
+            setIsAuthenticated(true);
+            navigate("/", {
+              replace: true,
+            });
+          } else {
+            toast.error("Invalid Token! Please Login");
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error("Invalid Token! Please Login");
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }
+  }, []);
 
   const onSuccessFullLogin = (response) => {
     let jwt = response.token;
@@ -35,11 +74,10 @@ function LoginBody() {
     Cookies.set("chat_token", jwt, {
       expires: 4,
     });
-    setTimeout(() => {
-      navigate("/", {
-        replace: true,
-      });
-    }, 2000);
+    setIsAuthenticated(true);
+    navigate("/", {
+      replace: true,
+    });
   };
 
   const onSubmitLogin = async (e) => {
@@ -76,7 +114,7 @@ function LoginBody() {
     <div className={styles.loginPageBody}>
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -94,6 +132,7 @@ function LoginBody() {
         <div className={styles.inputContainer}>
           <label htmlFor="email">Email</label>
           <input
+            disabled={loading}
             value={data.email}
             type="email"
             id="email"
@@ -104,6 +143,7 @@ function LoginBody() {
           <label htmlFor="password">Password</label>
           <div className={styles.customPasswordInput}>
             <input
+              disabled={loading}
               value={data.password}
               type={showPassword ? "text" : "password"}
               id="password"

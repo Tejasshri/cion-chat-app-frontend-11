@@ -16,8 +16,8 @@ export default function Body() {
     userMessages,
     setUserMessages,
     setScroll,
+    getOptions,
   } = useContext(ReactContext);
-  console.log(selectedUser);
 
   const fetchMessage = async (data) => {
     try {
@@ -26,15 +26,20 @@ export default function Body() {
         console.log(element, data, "data");
       });
 
-      const response = await fetch(`${webUrl}/messageData`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await fetch(
+        `${webUrl}/messageData`,
+        getOptions("POST", {
           message_id: data.whatsappMessageId,
-        }),
-      });
+        }) || {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message_id: data.whatsappMessageId,
+          }),
+        }
+      );
       const responseData = await response.json();
       if (response.ok) {
         if (responseData.data.type === "reaction") return;

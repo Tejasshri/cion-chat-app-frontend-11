@@ -95,7 +95,7 @@ const FailureView = ({ refresh }) => {
 };
 
 const UserMessagesSection = () => {
-  const { selectedUser, setUserMessages, userMessages, scroll } =
+  const { selectedUser, setUserMessages, userMessages, scroll, getOptions } =
     useContext(ReactContext);
   const [messageApiStatus, setMessageApiStatus] = useState(
     apiStatusConstants.initial
@@ -119,16 +119,10 @@ const UserMessagesSection = () => {
     try {
       setMessageApiStatus(apiStatusConstants.in_progress);
       let lastMessageApi = `${webUrl}/messageData`;
-      let options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_id: selectedUser.patient_phone_number,
-          messageLimit: 0,
-        }),
-      };
+      let options = getOptions("POST", {
+        user_id: selectedUser.patient_phone_number,
+        messageLimit: 0,
+      });
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
       if (response.ok) {
@@ -149,16 +143,10 @@ const UserMessagesSection = () => {
       setErr("");
       setIsLoading(true);
       let lastMessageApi = `${webUrl}/messageData`;
-      let options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_id: selectedUser.patient_phone_number,
-          messageLimit: limit.current,
-        }),
-      };
+      let options = getOptions("POST", {
+        user_id: selectedUser.patient_phone_number,
+        messageLimit: limit.current,
+      });
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
       if (response.ok) {
@@ -167,12 +155,10 @@ const UserMessagesSection = () => {
           if (i === responseData.data.length) {
             clearInterval(timer);
           } else {
-            // console.log(responseData.data.at(-i));
             setUserMessages((r) => [responseData.data.at(-i), ...r]);
           }
           i++;
         }, 50);
-        // setUserMessages((r) => [...responseData.data, ...r]);
       } else {
         setErr("Something went wrong");
       }
@@ -214,7 +200,6 @@ const UserMessagesSection = () => {
         return <FailureView refresh={getMessages} />;
       case apiStatusConstants.success:
         return getSuccessView();
-      
     }
   };
 

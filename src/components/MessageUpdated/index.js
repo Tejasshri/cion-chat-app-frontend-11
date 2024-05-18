@@ -24,7 +24,7 @@ const MessageUpdated = (props) => {
   const [docApiStatus, setDocApiStatus] = useState(apiStatusConstants.initial);
   const [showReactions, setShowReactions] = useState(false);
   const { messageData } = props;
-  const { userMessages, setUserMessages, selectedUser } =
+  const { userMessages, setUserMessages, selectedUser, getOptions } =
     useContext(ReactContext);
 
   if (!messageData) return "something unexpected";
@@ -34,20 +34,12 @@ const MessageUpdated = (props) => {
     try {
       setDocApiStatus(apiStatusConstants.in_progress);
       let lastMessageApi = `${webUrl}/messageData`;
-      let options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message_id: messageData.id,
-          is_last: false,
-        }),
-      };
+      let options = getOptions("POST", {
+        message_id: messageData.id,
+        is_last: false,
+      });
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
-
-      console.log(responseData);
 
       if (response.ok) {
         setUserMessages((n) =>
@@ -67,7 +59,7 @@ const MessageUpdated = (props) => {
   const getDownloadButton = () => {
     try {
       let { mime_type, filename } = messageData[`${type}`];
-      console.log(mime_type);
+      // console.log(mime_type);
       if (!mime_type) return <p>error</p>;
       let [dataName, dataExtension] = mime_type?.split("/") || [];
       if (mime_type.startsWith("application") || mime_type === "text/plain") {
@@ -193,11 +185,11 @@ const MessageUpdated = (props) => {
   };
 
   const skeltonImage = () => {
-    console.log(
-      type,
-      messageData?.compressedImage,
-      messageData?.image?.mime_type
-    );
+    // console.log(
+    //   type,
+    //   messageData?.compressedImage,
+    //   messageData?.image?.mime_type
+    // );
     if (type === "video")
       return (
         <FaRegPlayCircle

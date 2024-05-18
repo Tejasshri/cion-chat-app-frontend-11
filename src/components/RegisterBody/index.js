@@ -1,5 +1,5 @@
 // From React
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // Styles Module
 import styles from "./index.module.css";
@@ -13,6 +13,7 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { webUrl } from "../../Common";
 import { TailSpin } from "react-loader-spinner";
+import ReactContext from "../../context/ReactContext";
 
 // Empty User (initial User)
 const initialUser = {
@@ -27,6 +28,7 @@ function ResgisterBody() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+  const { getOptions } = useContext(ReactContext);
 
   const onSuccessFullLogin = (jwt) => {
     Cookies.set("chat_token", jwt, {
@@ -42,21 +44,14 @@ function ResgisterBody() {
     if (!data.email && !data.password && !data.username) return;
     try {
       setLoading(true);
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      };
-      let webUrl = "http://localhost:3005"
+      const options = getOptions("POST", data, false);
       const response = await fetch(`${webUrl}/coach/register`, options);
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData);
       if (response.ok) {
         onSuccessFullLogin(responseData.token);
       } else {
-        setErr("Oops something went wrong...");
+        setErr(responseData.msg || "Oops something went wrong...");
       }
     } catch (error) {
       setErr(error.message);
@@ -64,6 +59,7 @@ function ResgisterBody() {
       setLoading(false);
     }
   };
+  
   return (
     <div className={styles.loginPageBody}>
       <form className={styles.LoginForm} onSubmit={onSubmitRegister}>

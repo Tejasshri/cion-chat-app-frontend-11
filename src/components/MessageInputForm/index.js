@@ -31,8 +31,14 @@ function MessageInputForm() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-  const { users, setUsers, selectedUser, setUserMessages, setScroll } =
-    useContext(ReactContext);
+  const {
+    getOptions,
+    users,
+    setUsers,
+    selectedUser,
+    setUserMessages,
+    setScroll,
+  } = useContext(ReactContext);
   const [file, setFile] = useState(null);
   const [folder, setFolder] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -103,7 +109,6 @@ function MessageInputForm() {
     setFolder(null);
     setPreview(null);
     setShowEditor(true);
-    console.clear();
     console.log(selectedUser.note);
     setText(selectedUser.note);
     return () => {
@@ -118,16 +123,13 @@ function MessageInputForm() {
     const noteUpdateCallback = async () => {
       try {
         setTestApiStatus(apiStatusConstants.in_progress);
-        const response = await fetch(`${webUrl}/get-user-note`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        const response = await fetch(
+          `${webUrl}/get-user-note`,
+          getOptions("POST", {
             patient_phone_number: selectedUser.patient_phone_number,
             note: text,
-          }),
-        });
+          })
+        );
         const responseData = await response.json();
         if (response.ok) {
           setUsers((prevUser) =>
@@ -178,13 +180,7 @@ function MessageInputForm() {
     try {
       setErr("");
       setLoading(true);
-      let response = await fetch(api, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(preparedMsg),
-      });
+      let response = await fetch(api, getOptions("POST", preparedMsg));
       let offlineMessage = {
         _id: "",
         coach_phone_number: "+15556105902",

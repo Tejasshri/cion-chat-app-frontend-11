@@ -15,6 +15,8 @@ import { MdOutlineInsertPhoto } from "react-icons/md";
 import { useContext, useState } from "react";
 import ReactContext from "../../context/ReactContext";
 import { TailSpin } from "react-loader-spinner";
+import Cookies from "js-cookie";
+import { webUrl } from "../../Common";
 
 const MoreInputFeatures = (props) => {
   const {
@@ -32,8 +34,14 @@ const MoreInputFeatures = (props) => {
     setShowEmojiPicker,
     setShowEditor,
   } = props;
-  const { selectedUser, setUserMessages, users, setUsers, setScroll } =
-    useContext(ReactContext);
+  const {
+    getOptions,
+    selectedUser,
+    setUserMessages,
+    users,
+    setUsers,
+    setScroll,
+  } = useContext(ReactContext);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
@@ -153,16 +161,13 @@ const MoreInputFeatures = (props) => {
       formData.append("file", file);
       console.log(file);
       formData.append("to", selectedUser.patient_phone_number);
-      const response = await fetch("http://localhost:3005/recieve-media", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: formData,
-      });
+      console.log(getOptions("POST", formData, true, true));
+      const response = await fetch(
+        `${webUrl}/recieve-media`,
+        getOptions("POST", formData, true, true)
+      );
+
       const responseData = await response.json();
-      console.clear();
-      console.log(responseData);
       if (response.ok) {
         let offlineFileMessage = {
           _id: responseData.data.id,
@@ -202,6 +207,7 @@ const MoreInputFeatures = (props) => {
         focus();
         socket.emit("update message", offlineFileMessage);
       } else {
+        console.log(responseData.msg);
         setErr(responseData.msg || "Something Unexpected");
       }
     } catch (error) {
@@ -212,6 +218,7 @@ const MoreInputFeatures = (props) => {
     }
     console.log(file);
   };
+
   const sendFolder = async () => {
     try {
       setLoading(true);
@@ -222,13 +229,10 @@ const MoreInputFeatures = (props) => {
       formData.append("file", folder);
       formData.append("type", "document");
       formData.append("to", selectedUser.patient_phone_number);
-      const response = await fetch("http://localhost:3005/recieve-media", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `${webUrl}/recieve-media`,
+        getOptions("POST", formData, true, true)
+      );
       const responseData = await response.json();
       console.clear();
       console.log(responseData);
