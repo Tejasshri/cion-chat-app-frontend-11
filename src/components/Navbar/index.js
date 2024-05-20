@@ -71,16 +71,20 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
       default:
         return (
           <>
-            <li className={styles.coachContainer}>
-              <button onClick={onLogout} className={styles.logInNavBtn}>
-                <div className={styles.coachImage}></div>
-                <div className={styles.coachDetails}>
-                  <h1>{coach} Ji</h1>
-                  <p>Cancer Coach</p>
-                </div>
-                <FaAngleDown size={14} />
-              </button>
-            </li>
+            {loading ? (
+              <li className={styles.skeltonItem}></li>
+            ) : (
+              <li className={styles.coachContainer}>
+                <button onClick={onLogout} className={styles.logInNavBtn}>
+                  <div className={styles.coachImage}></div>
+                  <div className={styles.coachDetails}>
+                    <h1>{coach} Ji</h1>
+                    <p>Cancer Coach</p>
+                  </div>
+                  <FaAngleDown size={14} />
+                </button>
+              </li>
+            )}
           </>
         );
     }
@@ -89,9 +93,7 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
   return (
     <nav className={styles.navbar}>
       <img src="logo.png" alt="" draggable="false" loading="eager" />
-      <ul>
-        {loading ? <li className={styles.skeltonItem}></li> : getNavLinks()}
-      </ul>
+      <ul>{getNavLinks()}</ul>
     </nav>
   );
 };
