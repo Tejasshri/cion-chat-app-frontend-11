@@ -11,12 +11,20 @@ import { useNavigate } from "react-router-dom";
 import ReactContext from "../../context/ReactContext";
 
 import { ToastContainer, toast } from "react-toastify";
+import PopupContext from "../../context/PopupContext";
 const Navbar = ({ isPageLogin, isPageRegister }) => {
   const navigate = useNavigate();
   const { isAuthenticated, getOptions } = useContext(ReactContext);
+  const { hidePopup } = useContext(PopupContext);
+  const [showPopup, setShowPopup] = useState(false);
   const [coach, setCoach] = useState(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+
+  useEffect(() => {
+    console.log("hidePopup");
+    setShowPopup(false);
+  }, [hidePopup]);
 
   useEffect(() => {
     const token = Cookies.get("chat_token");
@@ -74,14 +82,27 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
             {loading ? (
               <li className={styles.skeltonItem}></li>
             ) : (
-              <li className={styles.coachContainer}>
-                <button onClick={onLogout} className={styles.logInNavBtn}>
+              <li
+                className={styles.coachContainer}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}>
+                <button
+                  className={styles.logInNavBtn}
+                  onClick={() => setShowPopup((n) => !n)}>
                   <div className={styles.coachImage}></div>
                   <div className={styles.coachDetails}>
                     <h1>{coach} Ji</h1>
                     <p>Cancer Coach</p>
                   </div>
                   <FaAngleDown size={14} />
+                  {showPopup && (
+                    <div className={styles.logoutPopupDiv}>
+                      <button className={styles.popupBtn}>Settings</button>
+                      <button className={styles.popupBtn} onClick={onLogout}>Logout</button>
+                    </div>
+                  )}
                 </button>
               </li>
             )}

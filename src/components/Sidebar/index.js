@@ -6,12 +6,15 @@ import ReactContext from "../../context/ReactContext";
 import User from "../User";
 import { webUrl } from "../../Common";
 import Cookies from "js-cookie";
+import PopupContext from "../../context/PopupContext";
 
 function Sidebar() {
   const { users, setUsers, selectedUser } = useContext(ReactContext);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState("");
   const { getOptions } = useContext(ReactContext);
+  
+
 
   const getUserData = async () => {
     let token = Cookies.get("chat_token");

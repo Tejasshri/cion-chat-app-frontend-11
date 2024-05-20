@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import styles from "./index.module.css";
 
@@ -7,6 +7,8 @@ import ChatSection from "../ChatSection";
 import ReactContext from "../../context/ReactContext";
 import { webUrl } from "../../Common";
 import socket from "../../Socket";
+
+import PopupContext from "../../context/PopupContext";
 
 export default function Body() {
   const {
