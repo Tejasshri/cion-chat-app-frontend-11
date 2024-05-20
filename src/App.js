@@ -15,6 +15,8 @@ import ReactContext from "./context/ReactContext";
 // Styles in module
 import "./App.css";
 
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./components/ProtectedRoute";

@@ -32,48 +32,25 @@ nav li {
   /* justify-content: center; */
 }
 
+.skeltonItem{
+  margin-right: 10px;
+  list-style: none;
+  background-color: rgb(117, 116, 116);
+  border-radius: 5px;
+  height: 50px;
+  width: 150px;
+  animation: blink 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logInNavBtn{
   padding: .1rem .6rem;
   font-size: .5rem;
   font-weight: 600;
   color: var(--brandColor);  
 }
-
-/* *{
-    font-family: 'Times New Roman', Times, serif;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-html{
-    font-size: 5.7vw;
-}
-
-@media screen and (min-width : 768px) {
-    html{
-        font-size: 2.7v;
-    }    
-}
-
-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding:0.5rem ;
-}
-
-nav h1{
-    font-size: 0.62rem;
-}
-
-nav button{
-    background-color: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 0.4rem;
-} */
 
 @keyframes blink {
   0% {
@@ -84,3 +61,50 @@ nav button{
   }
 }
 
+.coachContainer .logInNavBtn {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: white;
+}
+.coachImage{
+  height: 1.4rem;
+  width: 1.4rem;
+  background-color: grey;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.coachContainer .logInNavBtn h1{
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  line-height: .8rem;
+  font-size: .6rem;
+}
+
+.coachContainer .logInNavBtn p{
+  margin: 0;
+  padding: 0;
+  line-height: .5rem;
+  font-weight: 400;
+  font-size: .4rem;
+}
+
+.coachDetails{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: .4rem;
+}
+
+.coachContainer svg{
+  margin-left: .2rem;
+  font-size: .4rem !important;
+}
+
+*{
+  /* border: 1px solid red; */
+}

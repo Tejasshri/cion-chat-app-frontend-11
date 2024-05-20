@@ -36,9 +36,11 @@ function LoginBody() {
   }, []);
 
   useEffect(() => {
+    console.log(token);
     if (token) {
       (async () => {
         try {
+          console.log(token);
           toast.warning("Wait we are verifying you");
           setLoading(true);
           const options = {
