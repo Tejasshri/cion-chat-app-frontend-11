@@ -108,7 +108,7 @@ function MessageInputForm() {
     setFile(null);
     setFolder(null);
     setPreview(null);
-    setShowEditor(true);
+    setShowEditor(false);
     console.log(selectedUser.note);
     setText(selectedUser.note);
     return () => {
