@@ -118,11 +118,7 @@ function MessageInputForm() {
     setFile(null);
     setFolder(null);
     setPreview(null);
-<<<<<<< HEAD
-    // setShowEditor(true);
-=======
     setShowEditor(false);
->>>>>>> 2cfd61329a494a1ce1759f05c1e0ac77ddfadec3
     console.log(selectedUser.note);
     setText(selectedUser.note);
     return () => {
