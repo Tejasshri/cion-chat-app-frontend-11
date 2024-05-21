@@ -15,33 +15,25 @@ const apiStatusConstants = {
   failure: "FAILURE",
 };
 
+// const { fromUnixTime } = require("date-fns");
+
+
 function timestampToDateTime(timestamp) {
-  const ISTOffset = 5.5 * 60 * 60;
-  const additionalOffset = 5 * 60 * 60 + 30 * 60; // Additional 5 hours and 30 minutes in seconds
-  const secondsPerDay = 24 * 60 * 60;
-  const days = Math.floor(timestamp / secondsPerDay);
-  const remainingSeconds = timestamp % secondsPerDay;
-  const referenceDate = new Date("1970-01-01");
-  const targetDate = new Date(
-    referenceDate.getTime() + days * 1000 * secondsPerDay
-  );
+  const ISTOffset = 5.5 * 60 * 60; // 5.5 hours offset for IST timezone
 
+  const targetDate = fromUnixTime(timestamp);
+  
   // Convert UTC time to IST
-  targetDate.setTime(targetDate.getTime() + ISTOffset * 1000);
+  targetDate.setTime(targetDate.getTime());
 
-  let hours = Math.floor(remainingSeconds / 3600);
-  let minutes = Math.floor((remainingSeconds % 3600) / 60);
-  const seconds = remainingSeconds % 60;
+  let hours = targetDate.getHours();
+  let minutes = targetDate.getMinutes();
+  const seconds = targetDate.getSeconds();
   let currentDate = new Date();
   let isDateMatched =
     currentDate.getDate() === targetDate.getDate() &&
     currentDate.getMonth() === targetDate.getMonth() &&
     currentDate.getFullYear() === targetDate.getFullYear();
-
-  // Add additional offset if date is matched or tomorrow
-  if (isDateMatched || (currentDate.getDate() + 1 === targetDate.getDate())) {
-    targetDate.setTime(targetDate.getTime() + additionalOffset * 1000);
-  }
 
   // Convert hours to 12-hour format and determine AM or PM
   let amPm = hours >= 12 ? 'PM' : 'AM';
@@ -86,37 +78,11 @@ function timestampToDateTime(timestamp) {
   return formattedDateTime;
 }
 
-// function timestampToDateTime(timestamp) {
-//   let dateObj = fromUnixTime(timestamp);
-//   let [hour, minute, date, month, year] = [
-//     dateObj.getHours(),
-//     dateObj.getMinutes(),
-//     dateObj.getDate(),
-//     dateObj.getMonth(),
-//     dateObj.getFullYear(),
-//   ];
-//   console.log(hour, minute, date, month, year);
-
-//   const currentDateObj = new Date();
-//   let [currentHour, currentMinute, currentDate, currentMonth, currentYear] = [
-//     currentDateObj.getHours(),
-//     currentDateObj.getMinutes(),
-//     currentDateObj.getDate(),
-//     currentDateObj.getMonth(),
-//     currentDateObj.getFullYear(),
-//   ];
-   
-  
-//   let condition =
-//     year === currentYear && date === currentDate && month === currentMonth;
-//   if (condition) return `Today ${hour}:${minute}` 
-//   return "working";
-// }
-
 function checkSingleEmoji(text) {
-  const emojiRegex = /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
-  if (text.length === 2 && emojiRegex.test(text)){
-      return true
+  const emojiRegex =
+    /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+  if (text.length === 2 && emojiRegex.test(text)) {
+    return true;
   }
   return false;
 }

@@ -25,6 +25,7 @@ import ReactContext from "../../context/ReactContext";
 import { TailSpin } from "react-loader-spinner";
 
 import socket from "../../Socket.js";
+import PopupContext from "../../context/PopupContext.js";
 
 function MessageInputForm() {
   const [showDocMenu, setShowDocMenu] = useState(false);
@@ -39,6 +40,7 @@ function MessageInputForm() {
     setUserMessages,
     setScroll,
   } = useContext(ReactContext);
+  const { hidePopup } = useContext(PopupContext);
   const [file, setFile] = useState(null);
   const [folder, setFolder] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -85,6 +87,14 @@ function MessageInputForm() {
   //   }
   // }, [file]);
 
+  useEffect(() => {
+    setShowDocMenu(false);
+    setFile(null);
+    setPreview(null);
+    setFolder(null);
+    setShowEditor(false);
+  }, [hidePopup]);
+
   const focus = () => {
     const inputEl = document.getElementById("message-input");
     inputEl.focus();
@@ -108,7 +118,7 @@ function MessageInputForm() {
     setFile(null);
     setFolder(null);
     setPreview(null);
-    setShowEditor(true);
+    // setShowEditor(true);
     console.log(selectedUser.note);
     setText(selectedUser.note);
     return () => {
@@ -255,7 +265,12 @@ function MessageInputForm() {
 
   const getEditor = () => {
     return (
-      <div className={styles.editorDiv}>
+      <div
+        className={styles.editorDiv}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}>
         <div className={styles.editorLoader}>{getNoteSavedStatus()}</div>
         <Editor
           value={text}

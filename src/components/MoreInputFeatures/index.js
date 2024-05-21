@@ -56,7 +56,13 @@ const MoreInputFeatures = (props) => {
   const dataPreview = () => {
     return (
       preview && (
-        <div className={styles.previewContainer} id="preview-container">
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          className={styles.previewContainer}
+          id="preview-container">
           <button
             className={styles.closeBtn}
             onClick={() => {
@@ -127,7 +133,12 @@ const MoreInputFeatures = (props) => {
   const getDocMenu = () => {
     return (
       showDocMenu && (
-        <div className={styles.addFilesDiv}>
+        <div
+          className={styles.addFilesDiv}
+          onClick={(e) => {
+            // e.preventDefault();
+            e.stopPropagation();
+          }}>
           <div className={styles.fileUploadDiv}>
             <input
               onChange={onUpdateFile}
@@ -312,7 +323,9 @@ const MoreInputFeatures = (props) => {
       <button
         type="button"
         className={styles.featureBtn}
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
           setShowEditor(false);
           setShowEmojiPicker((n) => !n);
         }}>
@@ -321,13 +334,19 @@ const MoreInputFeatures = (props) => {
       <button
         className={styles.featureBtn}
         type="button"
-        onClick={() => setShowDocMenu((n) => !n)}>
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setShowDocMenu((n) => !n);
+        }}>
         <FaPlus size={20} />
       </button>
       <button
         type="button"
         className={styles.featureBtn}
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
           setShowEmojiPicker(false);
           setShowEditor((n) => !n);
         }}>
