@@ -118,7 +118,7 @@ const MoreInputFeatures = (props) => {
 
   const onUpdateFolder = (event) => {
     const folderItem = event.target.files[0];
-    if (folderItem.size > 2097152*5) {
+    if (folderItem.size > 11500000) {
       return alert("File is too big!");
     }
     console.log(folderItem);
@@ -308,7 +308,7 @@ const MoreInputFeatures = (props) => {
 
   const onUpdateFile = (event) => {
     const file = event.target.files[0];
-    if (file.size > 2097152*5) {
+    if (file.size > 11500000) {
       return alert("File is too big!");
     }
     setFile(file);
