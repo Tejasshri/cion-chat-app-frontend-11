@@ -129,13 +129,17 @@ const PatientEditForm = (props) => {
         </div>
         <div className={styles.editUserPopupInputContainer}>
           <label htmlFor="stage">Stage</label>
-          <input
+          <select
             type="text"
             id="stage"
             name="stage"
             value={editUserDetails.stage}
-            onChange={updateInput}
-          />
+            onChange={updateInput}>
+            <option value="Pre-OP">Pre-OP</option>
+            <option value="OP">OP</option>
+            <option value="Diagnostics">Diagnostics</option>
+            <option value="IP">IP</option>
+          </select>
         </div>
         <div className={styles.editUserPopupInputContainer}>
           <label htmlFor="center">Center</label>

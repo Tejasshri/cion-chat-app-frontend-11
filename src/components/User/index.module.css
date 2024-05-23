@@ -9,6 +9,10 @@
   justify-content: space-between;
 }
 
+.messageDetailsHeader h1 {
+    flex-grow: 1;
+}
+
 .imageDiv {
   height: 1.5rem;
   width: 1.5rem;
@@ -107,7 +111,7 @@
     color: var(--brandColor) !important;
     padding: 0.2 .6rem !important;
     text-transform: capitalize;
-    margin-left: 100%;
+    margin-left: .1rem !important;
     font-size: .3rem !important;
 }
 

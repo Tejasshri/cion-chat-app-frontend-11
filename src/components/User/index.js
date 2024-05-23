@@ -83,16 +83,32 @@ const User = (props) => {
         )}
         <div className={styles.messageDetailsContainer}>
           <div className={styles.messageDetailsHeader}>
-            <h1>{name}</h1>
+            <h1>{name.length > 10 ? name.substring(0, 10) + "..." : name}</h1>
             {userDetails.area && (
               <p
                 style={{
                   padding: "0 .1rem",
                 }}
                 className={styles.floatingLoabel}>
-                {userDetails.area.length > 4
-                  ? `${userDetails.area}`
-                  : userDetails.area}
+                {userDetails?.area && userDetails.area}
+              </p>
+            )}
+            {userDetails.stage && (
+              <p
+                style={{
+                  padding: "0 .1rem",
+                }}
+                className={styles.floatingLoabel}>
+                {userDetails?.stage && userDetails.stage}
+              </p>
+            )}
+            {userDetails.coach && (
+              <p
+                style={{
+                  padding: "0 .1rem",
+                }}
+                className={styles.floatingLoabel}>
+                {userDetails?.coach && userDetails.coach}
               </p>
             )}
           </div>

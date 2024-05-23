@@ -80,19 +80,19 @@ const initialFilterArray = [
         isSelected: true,
       },
       {
-        name: "1",
+        name: "Pre-OP",
         isSelected: false,
       },
       {
-        name: "2",
+        name: "OP",
         isSelected: false,
       },
       {
-        name: "3",
+        name: "Diagnostics",
         isSelected: false,
       },
       {
-        name: "4",
+        name: "IP",
         isSelected: false,
       },
     ],
@@ -106,7 +106,7 @@ function Sidebar() {
   const { getOptions } = useContext(ReactContext);
   const [filterArray, setFilterArray] = useState(initialFilterArray);
   const [filteredUsers, setFilteredUser] = useState([]);
-  const { hidePopup} = useContext(PopupContext) ;
+  const { hidePopup } = useContext(PopupContext);
   const getUserData = async () => {
     let token = Cookies.get("chat_token");
     try {
@@ -137,8 +137,7 @@ function Sidebar() {
         };
       })
     );
-  }, [ hidePopup])
-
+  }, [hidePopup]);
 
   useEffect(() => {
     const selectedFilters = filterArray.map((each) => {
@@ -161,8 +160,7 @@ function Sidebar() {
         return false;
       });
     });
-
-}, [filterArray, users]);
+  }, [filterArray, users]);
 
   useEffect(() => {
     getUserData();
@@ -216,8 +214,7 @@ function Sidebar() {
             ),
           };
         }
-        return eachFilter
-        
+        return eachFilter;
       })
     );
   };
