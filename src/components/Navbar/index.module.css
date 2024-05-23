@@ -129,6 +129,7 @@ nav li {
   box-shadow: 0 4px 16px 0 #bfbfbf;
   border-radius: .1rem;
   overflow: hidden;
+  z-index: 1100;
 }
 
 .popupBtn{
