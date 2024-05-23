@@ -36,7 +36,7 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
           const response = await fetch(`${webUrl}/get-coach-details`, options);
           const responseData = await response.json();
           if (response.ok) {
-            setCoach(responseData?.data?.coachName?.toUpperCase());
+            setCoach(responseData?.data?.coachName);
           } else {
             setErr(responseData.msg || "Some Went Wrong");
             toast.error(responseData.msg || "Some Went Wrong");
@@ -95,7 +95,7 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
                     {coach?.substring(0, 1) || ""}
                   </div>
                   <div className={styles.coachDetails}>
-                    <h1>{coach} Ji</h1>
+                    <h1>{coach}</h1>
                     <p>Cancer Coach</p>
                   </div>
                   <FaAngleDown size={14} />
