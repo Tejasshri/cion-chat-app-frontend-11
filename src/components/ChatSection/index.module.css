@@ -57,3 +57,38 @@
   background-color: green;
   margin-right: 0.1rem;
 }
+
+.notSelectedView{
+  /* border: 1px solid red; */
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.notSelectedView img {
+  height: 2rem;
+  /* border: 1px solid red; */
+}
+
+.notSelectedView h1 {
+  font-size: 1rem;
+  color: var(--brandColor);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  padding: 0;
+}
+
+.notSelectedView h1 svg{
+  margin-right: .2rem;
+  color: green;
+  font-size: 1.2rem;
+}
+
+.notSelectedView p {
+  font-size: .5rem;
+  color: var(--paragraphColor);
+  margin-top: .3rem;
+}

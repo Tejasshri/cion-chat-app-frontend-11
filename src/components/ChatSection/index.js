@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import ReactContext from "../../context/ReactContext";
 import { apiStatusConstants, webUrl } from "../../Common";
 import { FaRegUser } from "react-icons/fa";
-
+import { FaWhatsapp } from "react-icons/fa";
 
 import UserMessagesSection from "../UserMessagesSection";
 
@@ -17,9 +17,19 @@ const ChatSection = () => {
   const { selectedUser } = useContext(ReactContext);
   const { name } = selectedUser || "";
 
+  const getNotSelectedView = () => (
+    <div className={styles.notSelectedView}>
+      <img src="logo-1-new.png" alt="" />
+      <h1>
+        <FaWhatsapp /> ChatApp for CION Cancers
+      </h1>
+      <p>Chats between you and patients are end to end encrypted</p>
+    </div>
+  );
+
   return (
     <div className={styles.chatSection}>
-      {selectedUser !== undefined && (
+      {selectedUser !== undefined ? (
         <>
           <div className={styles.userDetailsHeader}>
             <div className={styles.userImageDiv}>
@@ -37,6 +47,8 @@ const ChatSection = () => {
           <UserMessagesSection />
           <MessageInputForm />
         </>
+      ) : (
+        getNotSelectedView()
       )}
     </div>
   );
