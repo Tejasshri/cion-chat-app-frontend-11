@@ -32,15 +32,7 @@ export default function Body() {
         `${webUrl}/messageData`,
         getOptions("POST", {
           message_id: data.whatsappMessageId,
-        }) || {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message_id: data.whatsappMessageId,
-          }),
-        }
+        })
       );
       const responseData = await response.json();
       if (response.ok) {
@@ -90,15 +82,12 @@ export default function Body() {
 
   const fetchPatient = async (userNumber) => {
     try {
-      const response = await fetch(`${webUrl}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await fetch(
+        `${webUrl}/users`,
+        getOptions("POST", {
           user_number: userNumber,
-        }),
-      });
+        })
+      );
       const responseData = await response.json();
       if (response.ok) {
         console.log(responseData, "Response Data");
