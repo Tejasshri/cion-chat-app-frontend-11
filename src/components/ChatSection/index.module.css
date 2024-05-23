@@ -68,12 +68,12 @@
 }
 
 .notSelectedView img {
-  height: 2rem;
+  height: 1.5rem;
   /* border: 1px solid red; */
 }
 
 .notSelectedView h1 {
-  font-size: 1rem;
+  font-size: .6rem;
   color: var(--brandColor);
   display: flex;
   align-items: center;
@@ -84,11 +84,13 @@
 .notSelectedView h1 svg{
   margin-right: .2rem;
   color: green;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .notSelectedView p {
-  font-size: .5rem;
+  font-size: .4rem;
   color: var(--paragraphColor);
-  margin-top: .3rem;
+  /* margin-top: .3rem; */
+  width: 7rem;
+  text-align: center;
 }

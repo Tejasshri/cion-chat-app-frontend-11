@@ -19,7 +19,7 @@ const ChatSection = () => {
 
   const getNotSelectedView = () => (
     <div className={styles.notSelectedView}>
-      <img src="logo-1-new.png" alt="" />
+      <img draggable={false} src="logo-1-new.png" alt="" />
       <h1>
         <FaWhatsapp /> ChatApp for CION Cancers
       </h1>
