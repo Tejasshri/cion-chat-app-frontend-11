@@ -8,14 +8,104 @@ import { webUrl } from "../../Common";
 import Cookies from "js-cookie";
 import PopupContext from "../../context/PopupContext";
 
+import { IoIosArrowDown } from "react-icons/io";
+
+import { Dropdown } from "primereact/dropdown";
+
+const initialFilterArray = [
+  {
+    show: false,
+    filterType: "city",
+    data: [
+      {
+        name: "All",
+        isSelected: true,
+      },
+      {
+        name: "Vizag",
+        isSelected: false,
+      },
+      {
+        name: "Punjagutta",
+        isSelected: false,
+      },
+    ],
+  },
+  {
+    show: false,
+    filterType: "coach",
+    data: [
+      {
+        name: "All",
+        isSelected: true,
+      },
+      {
+        name: "Pawan",
+        isSelected: false,
+      },
+      {
+        name: "Tejas",
+        isSelected: false,
+      },
+      {
+        name: "Lavan",
+        isSelected: false,
+      },
+    ],
+  },
+  {
+    show: false,
+    filterType: "Area",
+    data: [
+      {
+        name: "All",
+        isSelected: true,
+      },
+      {
+        name: "Tg North",
+        isSelected: false,
+      },
+      {
+        name: "Tg South",
+        isSelected: false,
+      },
+    ],
+  },
+  {
+    show: false,
+    filterType: "Stage",
+    data: [
+      {
+        name: "All",
+        isSelected: true,
+      },
+      {
+        name: "1",
+        isSelected: false,
+      },
+      {
+        name: "2",
+        isSelected: false,
+      },
+      {
+        name: "3",
+        isSelected: false,
+      },
+      {
+        name: "4",
+        isSelected: false,
+      },
+    ],
+  },
+];
+
 function Sidebar() {
   const { users, setUsers, selectedUser } = useContext(ReactContext);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState("");
   const { getOptions } = useContext(ReactContext);
-  
-
-
+  const [filterArray, setFilterArray] = useState(initialFilterArray);
+  const [filteredUsers, setFilteredUser] = useState([]);
   const getUserData = async () => {
     let token = Cookies.get("chat_token");
     try {
@@ -37,6 +127,31 @@ function Sidebar() {
     }
   };
 
+
+  useEffect(() => {
+    const selectedFilters = filterArray.map((each) => {
+      const selectedOption = each.data.find(
+        (eachOption) => eachOption.isSelected
+      );
+      return selectedOption ? selectedOption.name : null;
+    });
+
+    let [selectCity, selectedCoach, selectedArea, selectedStage] =
+      selectedFilters;
+
+    setFilteredUser((prevFilteredUser) => {
+      return users.filter((each) => {
+        if (selectedCoach === "All" || !selectedCoach) {
+          return true;
+        } else if (selectedCoach === each.coach) {
+          return true;
+        }
+        return false;
+      });
+    });
+
+}, [filterArray, users]);
+
   useEffect(() => {
     getUserData();
   }, []);
@@ -56,8 +171,72 @@ function Sidebar() {
     );
   };
 
+  const setShowFilter = (filterType) => {
+    setFilterArray((prevArray) =>
+      prevArray.map((eachFilter) => {
+        if (eachFilter.filterType === filterType) {
+          return {
+            ...eachFilter,
+            show: !eachFilter.show,
+          };
+        }
+        return {
+          ...eachFilter,
+          show: false,
+        };
+      })
+    );
+  };
+
+  const onChangeFilterOption = (filterType, filterOption) => {
+    setFilterArray((prevArray) =>
+      prevArray.map((eachFilter) => {
+        if (eachFilter.filterType === filterType) {
+          return {
+            ...eachFilter,
+            data: eachFilter.data.map((eachOption) =>
+              eachOption.name === filterOption
+                ? {
+                    ...eachOption,
+                    isSelected: true,
+                  }
+                : { ...eachOption, isSelected: false }
+            ),
+          };
+        }
+        return eachFilter
+        
+      })
+    );
+  };
+
   return (
     <aside>
+      <div className={styles.filterBtns}>
+        {filterArray.map((eachFilter) => (
+          <button
+            key={v4()}
+            className={styles.filterBtn}
+            onClick={() => setShowFilter(eachFilter.filterType)}>
+            {eachFilter.filterType.toUpperCase()}
+            <IoIosArrowDown />
+            {eachFilter.show && (
+              <select
+                value={eachFilter.data.find((each) => each.isSelected).name}
+                onChange={(e) =>
+                  onChangeFilterOption(eachFilter.filterType, e.target.value)
+                }
+                onClick={(e) => e.stopPropagation()}>
+                {eachFilter.data.map((each) => (
+                  <option key={v4()} value={each.name}>
+                    {each.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </button>
+        ))}
+      </div>
       <hr className={styles.hrLine} />
       <ul className={styles.userList}>
         {isLoading ? (
@@ -65,7 +244,7 @@ function Sidebar() {
         ) : err !== "" ? (
           getErrorView()
         ) : (
-          users?.map((each) => (
+          filteredUsers?.map((each) => (
             <User
               isSelected={each?._id === selectedUser?._id}
               key={v4()}

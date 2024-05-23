@@ -1,5 +1,6 @@
 nav {
   background-color: #80288f;
+  /* background-color: white; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +11,7 @@ nav {
 }
 
 nav img {
-  height: 1.4rem;
+  /* height: 1.4rem; */
   width: 4rem;
   border-radius: 5px;
 }
@@ -64,33 +65,40 @@ nav li {
 .coachContainer .logInNavBtn {
   display: flex;
   align-items: center;
-  background-color: transparent;
+  background-color: var(--brandColor);
   border: 0;
   outline: none;
   color: white;
+  border-radius: .2rem;
+  padding: .2rem .3rem;
 }
 .coachImage{
-  height: 1.4rem;
-  width: 1.4rem;
-  background-color: grey;
+  height: 1.2rem;
+  width: 1.2rem;
+  /* background-color: grey; */
+  border: 1px solid white;
   flex-shrink: 0;
   border-radius: 50%;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .coachContainer .logInNavBtn h1{
   margin: 0;
   padding: 0;
   font-weight: 500;
-  line-height: .8rem;
-  font-size: .6rem;
+  line-height: .7rem;
+  font-size: .5rem;
 }
 
 .coachContainer .logInNavBtn p{
   margin: 0;
   padding: 0;
-  line-height: .5rem;
+  line-height: .45rem;
   font-weight: 400;
-  font-size: .4rem;
+  font-size: .35rem;
 }
 
 .coachDetails{

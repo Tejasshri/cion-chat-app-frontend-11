@@ -91,7 +91,9 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
                 <button
                   className={styles.logInNavBtn}
                   onClick={() => setShowPopup((n) => !n)}>
-                  <div className={styles.coachImage}></div>
+                  <div className={styles.coachImage}>
+                    {coach?.substring(0, 1) || ""}
+                  </div>
                   <div className={styles.coachDetails}>
                     <h1>{coach} Ji</h1>
                     <p>Cancer Coach</p>
@@ -100,7 +102,9 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
                   {showPopup && (
                     <div className={styles.logoutPopupDiv}>
                       <button className={styles.popupBtn}>Settings</button>
-                      <button className={styles.popupBtn} onClick={onLogout}>Logout</button>
+                      <button className={styles.popupBtn} onClick={onLogout}>
+                        Logout
+                      </button>
                     </div>
                   )}
                 </button>
@@ -113,7 +117,7 @@ const Navbar = ({ isPageLogin, isPageRegister }) => {
 
   return (
     <nav className={styles.navbar}>
-      <img src="logo.png" alt="" draggable="false" loading="eager" />
+      <img src="logo-final.png" alt="Nav" draggable="false" loading="eager" />
       <ul>{getNavLinks()}</ul>
     </nav>
   );

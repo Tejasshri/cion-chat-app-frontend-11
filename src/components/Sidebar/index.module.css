@@ -180,3 +180,40 @@ aside {
   border-radius: 0.1rem;
   margin-top: 0.2rem;
 }
+
+.filterBtns{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: .3rem;
+}
+
+.filterBtn{
+  padding: .1rem .2rem;
+  border: 0;
+  background: rgb(152, 2, 152);
+  color: white;
+  border-radius: .1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.filterBtn svg{
+  margin-left: .1rem;
+}
+
+.filterBtn select {
+  position: absolute;
+  bottom: -1rem;
+  outline: none;
+  border: 0;
+  min-height: .6rem;
+  min-width: 2rem;
+  box-shadow: 0 4px 16px 0 #bfbfbf;
+  padding: .2rem;
+  z-index: 1001;
+  border-radius: .1rem;
+  color: grey;
+  left: 0;
+}

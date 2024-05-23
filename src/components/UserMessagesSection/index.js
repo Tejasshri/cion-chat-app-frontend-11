@@ -126,7 +126,7 @@ const UserMessagesSection = () => {
       let response = await fetch(lastMessageApi, options);
       let responseData = await response.json();
       if (response.ok) {
-        console.log("Okay");
+        console.log("Okay", responseData.data);
         setUserMessages(responseData.data);
         setMessageApiStatus(apiStatusConstants.success);
       } else {
