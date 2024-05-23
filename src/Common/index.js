@@ -50,9 +50,8 @@ function timestampToDateTime(timestamp) {
   let formattedDateTime;
 
   if (isDateMatched) {
-    formattedDateTime = `Today ${hours}:${minutes} ${amPm}`;
+    formattedDateTime = `${hours}:${minutes} ${amPm}`;
   } else {
-    // Check if targetDate is tomorrow
     let tomorrowDate = new Date(currentDate);
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
     tomorrowDate.setTime(tomorrowDate.getTime() + ISTOffset * 1000);
@@ -87,6 +86,6 @@ function checkSingleEmoji(text) {
   return false;
 }
 
-console.log(timestampToDateTime(1715518996));
+// console.log(timestampToDateTime(1715518996));
 
 export { apiStatusConstants, webUrl, timestampToDateTime, checkSingleEmoji };

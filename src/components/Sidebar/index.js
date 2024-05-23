@@ -106,6 +106,7 @@ function Sidebar() {
   const { getOptions } = useContext(ReactContext);
   const [filterArray, setFilterArray] = useState(initialFilterArray);
   const [filteredUsers, setFilteredUser] = useState([]);
+  const { hidePopup} = useContext(PopupContext) ;
   const getUserData = async () => {
     let token = Cookies.get("chat_token");
     try {
@@ -126,6 +127,17 @@ function Sidebar() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    setFilterArray((prevArray) =>
+      prevArray.map((eachFilter) => {
+        return {
+          ...eachFilter,
+          show: false,
+        };
+      })
+    );
+  }, [ hidePopup])
 
 
   useEffect(() => {
@@ -212,7 +224,7 @@ function Sidebar() {
 
   return (
     <aside>
-      <div className={styles.filterBtns}>
+      <div className={styles.filterBtns} onClick={(e) => e.stopPropagation()}>
         {filterArray.map((eachFilter) => (
           <button
             key={v4()}

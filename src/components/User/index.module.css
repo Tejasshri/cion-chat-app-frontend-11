@@ -99,16 +99,27 @@
 }
 
 .floatingLoabel{
-    position: absolute;
+    /* position: absolute;
     bottom: .2rem;
-    right: .2rem;
-    background-color: var(--brandColor);
+    right: .2rem; */
+    background-color: rgba(128, 42, 143, .1);
     border-radius: .1rem;
-    color: white !important;
-    padding: 0.1 .5rem !important;
+    color: var(--brandColor) !important;
+    padding: 0.2 .6rem !important;
     text-transform: capitalize;
+    margin-left: 100%;
+    font-size: .3rem !important;
 }
 
 .user{
     position: relative;
+}
+
+.lastMessageInnerDiv2{
+    display: flex;
+    align-items: center;
+}
+
+.lastMessageText{
+    flex-grow: 1;
 }

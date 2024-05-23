@@ -28,18 +28,24 @@ const User = (props) => {
     if (lastMessage) {
       if (lastMessage.type === "text") {
         return (
-          <p>
-            {lastMessage.text.body.length > 20
-              ? lastMessage.text.body.substring(0, 20) + "..."
-              : lastMessage.text.body.substring(0, 20)}
-          </p>
+          <div className={styles.lastMessageInnerDiv2}>
+            <p className={styles.lastMessageText}>
+              {lastMessage.text.body.length > 20
+                ? lastMessage.text.body.substring(0, 20) + "..."
+                : lastMessage.text.body.substring(0, 20)}
+            </p>
+            <p>{getTime()}</p>
+          </div>
         );
       } else {
         return (
-          <p>
-            <FaImage size={14} class={styles.lastMessageImageIcon} />
-            {lastMessage.type}
-          </p>
+          <div className={styles.lastMessageInnerDiv2}>
+            <p className={styles.lastMessageText}>
+              <FaImage size={14} class={styles.lastMessageImageIcon} />
+              {lastMessage.type}
+            </p>
+            <p>{getTime()}</p>
+          </div>
         );
       }
     }
@@ -65,14 +71,8 @@ const User = (props) => {
         className={
           isSelected ? `${styles.selectedUser} ${styles.user}` : styles.user
         }
-        // onContextMenu={(e) => {
-        //   console.log(e.target)
-        //   e.preventDefault()
-        //   setEditPopupOpen(true);
-        // }}
         onClick={(e) => {
           setSelectedUser(userDetails);
-          // setEditPopupOpen(true);
         }}>
         {!imageUrl ? (
           <div className={styles.imageDiv}>
@@ -84,7 +84,17 @@ const User = (props) => {
         <div className={styles.messageDetailsContainer}>
           <div className={styles.messageDetailsHeader}>
             <h1>{name}</h1>
-            <p>{getTime()}</p>
+            {userDetails.area && (
+              <p
+                style={{
+                  padding: "0 .1rem",
+                }}
+                className={styles.floatingLoabel}>
+                {userDetails.area.length > 4
+                  ? `${userDetails.area}`
+                  : userDetails.area}
+              </p>
+            )}
           </div>
           {getLastMessage()}
         </div>
@@ -96,17 +106,6 @@ const User = (props) => {
           }}>
           <BsThreeDotsVertical color="black" />
         </button>
-        {userDetails.area && (
-          <p
-            style={{
-              padding: "0 .1rem",
-            }}
-            className={styles.floatingLoabel}>
-            {userDetails.area.length > 4
-              ? `${userDetails.area?.substring(0, 4)}...`
-              : userDetails.area}
-          </p>
-        )}
       </li>
       {editPopupOpen && (
         <PatientEditForm

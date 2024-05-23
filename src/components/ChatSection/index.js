@@ -21,7 +21,7 @@ const ChatSection = () => {
     <div className={styles.notSelectedView}>
       <img draggable={false} src="logo-1-new.png" alt="" />
       <h1>
-        <FaWhatsapp /> ChatApp for CION Cancers
+        <FaWhatsapp /> ChatApp for CION Cancer Clinics
       </h1>
       <p>Chats between you and patients are end to end encrypted</p>
     </div>
