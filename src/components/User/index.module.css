@@ -127,3 +127,7 @@
 .lastMessageText{
     flex-grow: 1;
 }
+
+.time {
+  font-size: .3rem !important;
+}

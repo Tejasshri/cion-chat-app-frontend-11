@@ -15,6 +15,7 @@ import ReactContext from "./context/ReactContext";
 // Styles in module
 import "./App.css";
 
+// Styles for PrimeReact's Components
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 import LoginPage from "./pages/LoginPage";

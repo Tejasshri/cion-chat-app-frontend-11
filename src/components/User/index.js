@@ -34,7 +34,7 @@ const User = (props) => {
                 ? lastMessage.text.body.substring(0, 20) + "..."
                 : lastMessage.text.body.substring(0, 20)}
             </p>
-            <p>{getTime()}</p>
+            <p className={styles.time}>{getTime()}</p>
           </div>
         );
       } else {
@@ -44,7 +44,7 @@ const User = (props) => {
               <FaImage size={14} class={styles.lastMessageImageIcon} />
               {lastMessage.type}
             </p>
-            <p>{getTime()}</p>
+            <p className={styles.time}>{getTime()}</p>
           </div>
         );
       }
